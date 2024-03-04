@@ -34,11 +34,6 @@
         # > Our main nixos configuration file <
         modules = [
 	  ./nixos/configuration.nix
-	  nixos-hardware.nixosModules.common-pc
-	  nixos-hardware.nixosModules.common-pc-ssd
-	  nixos-hardware.nixosModules.common-cpu-intel
-	  nixos-hardware.nixosModules.common-gpu-intel
-	  nixos-hardware.nixosModules.common-gpu-amd
 	];
       };
     };
