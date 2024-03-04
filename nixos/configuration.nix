@@ -22,6 +22,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
+  hardware.amdgpu.amdvlk = false;
 
   nixpkgs = {
     # You can add overlays here
