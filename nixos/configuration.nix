@@ -151,11 +151,7 @@
     ];
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      ungoogled-chromium
-      firefox
-      kate
       flatpak
-    #  thunderbird
     ];
   };
 
@@ -168,6 +164,7 @@
     zsh
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    gnome.adwaita-icon-theme
   ];
 
   programs.git.enable = true;

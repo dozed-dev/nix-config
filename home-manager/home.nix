@@ -48,6 +48,9 @@
   home.packages = with pkgs; [
     steam
     telegram-desktop
+    lutris
+    firefox
+    ungoogled-chromium
   ];
 
   # Enable home-manager and git
