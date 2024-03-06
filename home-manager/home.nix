@@ -49,6 +49,7 @@
     steam
     telegram-desktop
     lutris
+    wine
     firefox
     ungoogled-chromium
   ];
