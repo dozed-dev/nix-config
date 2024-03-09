@@ -165,6 +165,7 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     gnome.adwaita-icon-theme
+    apparmor-utils
   ];
 
   programs.git.enable = true;
@@ -178,6 +179,9 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     gamescopeSession.enable = true; # Enable gamescope compositor
+  };
+  programs.firejail = {
+    enable = true;
   };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
