@@ -75,6 +75,9 @@
     "clearcpuid=304" # Disable AVX-512 to play The Finals
   ];
 
+  # Emulation
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   networking.hostName = "home-desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
