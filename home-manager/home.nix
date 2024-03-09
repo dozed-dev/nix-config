@@ -52,6 +52,10 @@
     wine
     firefox
     ungoogled-chromium
+    remmina
+    waypipe
+    kate
+    krita
   ];
 
   # Enable home-manager and git
