@@ -56,6 +56,7 @@
     waypipe
     kate
     krita
+    mpv
   ];
 
   # Enable home-manager and git
