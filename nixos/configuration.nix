@@ -169,6 +169,7 @@
     wget
     gnome.adwaita-icon-theme
     apparmor-utils
+    pciutils
   ];
 
   programs.git.enable = true;
