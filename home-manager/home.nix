@@ -57,6 +57,7 @@
     kate
     krita
     mpv
+    lazygit
   ];
 
   # Enable home-manager and git
