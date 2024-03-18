@@ -78,6 +78,10 @@
   # Emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+  # Kernel modules
+  boot.extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
+  boot.kernelModules = [ "ddcci" "i2c-dev" ];
+
   networking.hostName = "home-desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -146,13 +150,14 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  users.groups.i2c = {};
   users.users.quitzka = {
     isNormalUser = true;
     description = "quitzka";
     openssh.authorizedKeys.keys = [
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "i2c" ];
     packages = with pkgs; [
       flatpak
     ];
@@ -170,7 +175,10 @@
     gnome.adwaita-icon-theme
     apparmor-utils
     pciutils
+    ddcutil
   ];
+
+  services.udev.packages = with pkgs; [ ddcutil ];
 
   programs.git.enable = true;
   programs.neovim = {
