@@ -1,5 +1,5 @@
 {
-  description = "Your new nix config";
+  description = "Your new nix config. Taken from https://github.com/Misterio77/nix-starter-configs";
 
   inputs = {
     # Nixpkgs
