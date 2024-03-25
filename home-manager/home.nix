@@ -58,6 +58,8 @@
     krita
     mpv
     lazygit
+    godot_4
+    blender
   ];
 
   # Enable home-manager and git
