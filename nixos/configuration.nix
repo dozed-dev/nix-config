@@ -158,9 +158,6 @@
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
     extraGroups = [ "networkmanager" "wheel" "i2c" ];
-    packages = with pkgs; [
-      flatpak
-    ];
   };
 
   # Set Zsh as the default user shell for all users
