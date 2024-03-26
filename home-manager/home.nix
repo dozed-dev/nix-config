@@ -60,11 +60,16 @@
     lazygit
     godot_4
     blender
+    lunarvim
   ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
+
+  home.sessionVariables = {
+    EDITOR = "lvim";
+  };
 
   home.shellAliases = {
     e = "$EDITOR";
