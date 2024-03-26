@@ -66,6 +66,10 @@
   programs.home-manager.enable = true;
   programs.git.enable = true;
 
+  home.shellAliases = {
+    e = "$EDITOR";
+  };
+
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
