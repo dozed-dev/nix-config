@@ -17,4 +17,7 @@
       config.allowUnfree = true;
     };
   };
+  nekoray = final: _prev: {
+    nekoray = _prev.libsForQt5.callPackage ./nekoray.nix {};
+  };
 }
