@@ -65,7 +65,17 @@
     blender
     lunarvim
     nekoray
+
+    kde-gtk-config
+    kdePackages.qtstyleplugin-kvantum
+    libsForQt5.qtstyleplugin-kvantum
+
+    ubuntu_font_family
+    cantarell-fonts
+    fira-code-nerdfont
   ];
+
+  fonts.fontconfig.enable = true;
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
