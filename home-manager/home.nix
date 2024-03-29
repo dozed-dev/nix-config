@@ -49,6 +49,7 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
+    # Desktop stuff
     steam
     telegram-desktop
     lutris
@@ -60,12 +61,16 @@
     kate
     krita
     mpv
+    nekoray
+
+    # Dev
+    lunarvim
     lazygit
     godot_4
     blender
-    lunarvim
-    nekoray
+    ansible
 
+    # Theming
     kde-gtk-config
     kdePackages.qtstyleplugin-kvantum
     libsForQt5.qtstyleplugin-kvantum
