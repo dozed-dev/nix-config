@@ -61,6 +61,7 @@
     kate
     krita
     mpv
+    obs-studio
     nekoray
 
     # Dev
@@ -69,6 +70,7 @@
     godot_4
     blender
     ansible
+    python3
 
     # Theming
     kde-gtk-config
