@@ -33,8 +33,6 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    nixpkgs = inputs.nixpkgs-unstable;
-    home-manager = inputs.home-manager-unstable;
   in {
 
     # Your custom packages and modifications, exported as overlays
@@ -43,7 +41,9 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      home-desktop = nixpkgs.lib.nixosSystem {
+      home-desktop = let
+        nixpkgs = inputs.nixpkgs-unstable;
+      in nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
         modules = [
@@ -55,7 +55,10 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "quitzka@home-desktop" = home-manager.lib.homeManagerConfiguration {
+      "quitzka@home-desktop" = let
+        nixpkgs = inputs.nixpkgs-unstable;
+        home-manager = inputs.home-manager-unstable;
+      in home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         # > Our main home-manager configuration file <
