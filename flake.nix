@@ -3,15 +3,19 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    # You can access packages and modules from different nixpkgs revs
-    # at the same time. Here's an working example:
+    nixpkgs-stable.url = "nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     # Hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -29,6 +33,8 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+    nixpkgs = inputs.nixpkgs-unstable;
+    home-manager = inputs.home-manager-unstable;
   in {
 
     # Your custom packages and modifications, exported as overlays
