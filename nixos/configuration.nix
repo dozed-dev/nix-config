@@ -179,6 +179,8 @@
     ddcutil
     gnome.adwaita-icon-theme
     wl-clipboard
+    htop
+    sshfs
   ];
 
   services.udev.packages = with pkgs; [ ddcutil ];

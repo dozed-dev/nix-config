@@ -63,6 +63,7 @@
     mpv
     obs-studio
     nekoray
+    qbittorrent
 
     # Dev
     lunarvim
