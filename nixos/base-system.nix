@@ -16,6 +16,9 @@
     pciutils
     htop
     sshfs
+    netcat-gnu
+    ripgrep
+    fd
   ];
 
   # SSH server. Very important if you're setting up a headless system.
