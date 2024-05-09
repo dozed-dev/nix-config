@@ -39,6 +39,8 @@
     "clearcpuid=304" # Disable AVX-512 to play The Finals
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages;
+
   # Emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
