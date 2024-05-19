@@ -27,6 +27,7 @@
     ../nixpkgs.nix
     ../plasma-desktop.nix
     ../ddcci.nix
+    ../yubikey.nix
     ../base-system.nix
   ];
   hardware.amdgpu.amdvlk = false;
