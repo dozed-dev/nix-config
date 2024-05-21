@@ -4,6 +4,16 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
+    lunarvim = prev.lunarvim.overrideAttrs (oldAttrs: rec {
+      version = "1.4.0";
+      src = prev.fetchFromGitHub {
+        owner = "LunarVim";
+        repo = "LunarVim";
+        rev = "refs/tags/${version}";
+        hash = "sha256-uuXaDvZ9VaRJlZrdu28gawSOJFVSo5XX+JG53IB+Ijw=";
+      };
+      patches = [ ];
+    });
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });

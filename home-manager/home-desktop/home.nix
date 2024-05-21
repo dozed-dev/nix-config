@@ -20,6 +20,7 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
+      outputs.overlays.modifications
       # If you want to use modules from other flakes (such as nixos-hardware):
       outputs.overlays.nekoray
       # If you want to use overlays exported from other flakes:
