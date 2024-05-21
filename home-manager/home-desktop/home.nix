@@ -54,6 +54,7 @@
     wine
     firefox
     ungoogled-chromium
+    tor-browser
     remmina
     waypipe
     kate
