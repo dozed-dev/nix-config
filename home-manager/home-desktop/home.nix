@@ -64,6 +64,7 @@
     obs-studio
     nekoray
     qbittorrent
+    fjordlauncher
 
     # Dev
     lunarvim
