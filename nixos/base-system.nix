@@ -19,6 +19,8 @@
     netcat-gnu
     ripgrep
     fd
+    file
+    tree
   ];
 
   # SSH server. Very important if you're setting up a headless system.
