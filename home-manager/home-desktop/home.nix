@@ -49,25 +49,31 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
+    # Tools
+    yubikey-manager
+    yubikey-manager-qt
+    remmina
+    nekoray
+
     # Desktop stuff
-    steam
     telegram-desktop
-    lutris
-    wine
     firefox
     ungoogled-chromium
     tor-browser
-    remmina
-    waypipe
     kate
     krita
     mpv
     obs-studio
-    nekoray
     qbittorrent
+
+    # Gaming
+    steam
+    lutris
+    wine
     fjordlauncher
 
     # Dev
+    waypipe
     lunarvim
     lazygit
     godot_4
