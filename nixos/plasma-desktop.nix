@@ -40,6 +40,15 @@
   environment.systemPackages = with pkgs; [
     gnome.adwaita-icon-theme
     wl-clipboard
+    kdePackages.kdialog
+  ];
+
+  # Fonts
+  fonts.packages = with pkgs; [
+    fira-code
+    noto-fonts-cjk
+    noto-fonts-color-emoji
+    cantarell-fonts
   ];
 
   programs.steam = {
