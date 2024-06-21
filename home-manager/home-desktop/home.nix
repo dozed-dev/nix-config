@@ -74,6 +74,7 @@
 
     # Dev
     waypipe
+    helix
     lunarvim
     lazygit
     godot_4
@@ -98,7 +99,7 @@
   programs.git.enable = true;
 
   home.sessionVariables = {
-    EDITOR = "lvim";
+    EDITOR = "hx";
   };
 
   home.shellAliases = {
