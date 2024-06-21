@@ -7,18 +7,18 @@ final: prev: rec {
     src = prev.fetchFromGitHub {
       owner = "unmojang";
       repo = "FjordLauncher";
-      rev = "13a32a66422e171c59ce861680fd184587057d08";
-      hash = "sha256-5ioRE+CawMkVdPWMn1nWqcNglMPRfQisxcKLA5n135A=";
+      rev = "master";
+      hash = "sha256-mRPs20ZLtNEC4FK4eaAdeqHvfrTiz/g+JjghLN5Tzfc=";
     };
 
     # Disable DRM again (revert the commits that enable it)
-    patches = [
-      (prev.fetchpatch {
-        url = "https://github.com/unmojang/FjordLauncher/commit/13a32a66422e171c59ce861680fd184587057d08.patch";
-        hash = "sha256-/UUTbBq7KIvKuqCWTFSSNmpbN7DnO1/BgQCykl9teCk=";
-        revert = true;
-      })
-    ];
+    #patches = [
+    #  (prev.fetchpatch {
+    #    url = "https://github.com/unmojang/FjordLauncher/commit/13a32a66422e171c59ce861680fd184587057d08.patch";
+    #    hash = "sha256-/UUTbBq7KIvKuqCWTFSSNmpbN7DnO1/BgQCykl9teCk=";
+    #    revert = true;
+    #  })
+    #];
 
     meta = oldAttrs.meta // {
       mainProgram = "fjordlauncher";
