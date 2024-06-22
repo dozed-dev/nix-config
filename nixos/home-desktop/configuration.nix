@@ -30,7 +30,6 @@
     ../yubikey.nix
     ../base-system.nix
   ];
-  hardware.amdgpu.amdvlk = false;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -40,7 +39,7 @@
     "clearcpuid=304" # Disable AVX-512 to play The Finals
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # Emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
