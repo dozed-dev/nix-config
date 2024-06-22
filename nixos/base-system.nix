@@ -37,4 +37,11 @@
   # Virtualization host
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
+
+  # RTL-SDR
+  services.udev.packages = [ pkgs.rtl-sdr ];
+  boot.extraModprobeConfig = ''
+    blacklist dvb_usb_rtl28xxu
+  '';
+  users.groups.plugdev = {};
 }
