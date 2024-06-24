@@ -23,6 +23,7 @@
       outputs.overlays.modifications
       # If you want to use modules from other flakes (such as nixos-hardware):
       outputs.overlays.nekoray
+      outputs.overlays.gost3
       outputs.overlays.fjordlauncher
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -49,7 +50,15 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
-    # Tools
+    # Network tools
+    tcping-go
+    gost3
+    waypipe
+    wireguard-tools
+    dig
+    iperf3
+
+    # GUI Tools
     yubikey-manager
     yubikey-manager-qt
     remmina
@@ -73,7 +82,6 @@
     fjordlauncher
 
     # Dev
-    waypipe
     helix
     lunarvim
     lazygit

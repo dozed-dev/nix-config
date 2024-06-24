@@ -30,5 +30,8 @@
   nekoray = final: _prev: {
     nekoray = _prev.libsForQt5.callPackage ./nekoray.nix {};
   };
+  gost3 = final: _prev: {
+    gost3 = _prev.libsForQt5.callPackage ./gost3.nix {};
+  };
   fjordlauncher = import ./fjordlauncher.nix;
 }
