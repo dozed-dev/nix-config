@@ -90,6 +90,10 @@
     ansible
     python3
 
+    # LSP
+    nixd
+    nodePackages.bash-language-server
+
     # Theming
     kde-gtk-config
     kdePackages.qtstyleplugin-kvantum
