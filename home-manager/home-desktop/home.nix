@@ -57,6 +57,9 @@
     wireguard-tools
     dig
     iperf3
+    inetutils
+    rs-tftpd
+    nmap
 
     # GUI Tools
     yubikey-manager
