@@ -77,6 +77,7 @@
     mpv
     obs-studio
     qbittorrent
+    unar
 
     # Gaming
     steam
