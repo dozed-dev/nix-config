@@ -1,16 +1,16 @@
 { stdenv, lib, fetchFromGitHub, buildGoModule, fetchpatch }:
 buildGoModule rec {
   pname = "gost3";
-  version = "v3.0.0-nightly.20240624";
+  version = "v3.0.0-nightly.20240715";
 
   src = fetchFromGitHub {
     owner = "go-gost";
     repo = "gost";
     rev = "${version}";
-    sha256 = "sha256-w/tD6Z3fM+PgqTTBW1SKUMNw8Hl+Jxl7UgcQSTeP1F4=";
+    sha256 = "sha256-+y4aPXaeCbQsveh3yBFiiBDlt/d0M92OPkLK/IcR7E4=";
   };
 
-  vendorHash = "sha256-xvMx55XdxtY+dSkj7rdu4TUk+xKi0yoeJ1sME6lxnek=";
+  vendorHash = "sha256-dplaq96NtCf5HdbnHes4cOVq7jMmDZXhpB9aDDXMhWA=";
 
   __darwinAllowLocalNetworking = true;
 
