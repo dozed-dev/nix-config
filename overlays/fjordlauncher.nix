@@ -1,14 +1,14 @@
 # Patches Prism launcher to be Fjord :)
 final: prev: rec {
-  fjordlauncher-unwrapped = prev.prismlauncher-unwrapped.overrideAttrs (oldAttrs: {
+  fjordlauncher-unwrapped = prev.prismlauncher-unwrapped.overrideAttrs (oldAttrs: rec {
     pname = "fjordlauncher-unwrapped";
-    version = "8.3.2";
+    version = "8.4.1";
 
     src = prev.fetchFromGitHub {
       owner = "unmojang";
       repo = "FjordLauncher";
-      rev = "master";
-      hash = "sha256-mRPs20ZLtNEC4FK4eaAdeqHvfrTiz/g+JjghLN5Tzfc=";
+      rev = "${version}";
+      hash = "sha256-eE4twtyfx3SfMNu8r5VxThwQm4BRLYhpTtk8rgVmyGE=";
     };
 
     # Disable DRM again (revert the commits that enable it)
