@@ -104,7 +104,7 @@
     libsForQt5.qtstyleplugin-kvantum
 
     ubuntu_font_family
-    cantarell-fonts
+    inter
     fira-code-nerdfont
   ];
 

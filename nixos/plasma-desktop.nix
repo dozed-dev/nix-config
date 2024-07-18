@@ -48,7 +48,7 @@
     fira-code
     noto-fonts-cjk
     noto-fonts-color-emoji
-    cantarell-fonts
+    inter
   ];
 
   programs.steam = {
