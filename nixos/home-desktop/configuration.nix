@@ -44,6 +44,11 @@
   # Emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+  # Sysrq
+  boot.kernel.sysctl = {
+    "kernel.sysrq" = 128;
+  };
+
   networking.firewall.enable = false;
   networking.hostName = "home-desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

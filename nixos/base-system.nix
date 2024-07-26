@@ -34,6 +34,12 @@
     };
   };
 
+  # OOM killer
+  systemd.oomd = {
+    enable = true;
+    enableUserSlices = true;
+  };
+
   # Virtualization host
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
