@@ -13,20 +13,20 @@
 }:
 stdenv.mkDerivation rec {
   pname = "nekoray";
-  version = "3.26";
-  date = "2023-12-09";
+  version = "4.0-beta3";
+  date = "2024-07-13";
 
   src = fetchzip {
     url = "https://github.com/MatsuriDayo/nekoray/releases/download/${version}/nekoray-${version}-${date}-linux64.zip";
-    hash = "sha256-Wp97qT3VBlSxK2qAVLxm041NR0c5vi8SSI/4VdwvQTY=";
+    hash = "sha256-JA5LuAkqnUzZVUoYImhbZqS4lu9f7bbQn0W7gy70Lgg=";
   };
 
   desktopItems = [
     (makeDesktopItem {
       name = pname;
       desktopName = pname;
-      exec = "nekoray";
-      icon = "nekoray";
+      exec = "nekobox";
+      icon = "nekobox";
       comment = "Qt based cross-platform GUI proxy configuration manager";
       categories = ["Network" "Utility"];
     })
@@ -46,14 +46,14 @@ stdenv.mkDerivation rec {
     runHook preInstall
 
     mkdir -p $out/{share/icons/hicolor/128x128/apps,usr/lib/nekoray,bin}
-    install -Dm755 ./{nekobox_core,nekoray_core,nekoray} $out/usr/lib/nekoray/
+    install -Dm755 ./{nekobox_core,nekobox} $out/usr/lib/nekoray/
     install -Dm644 ./{geosite.db,geosite.dat,geoip.db,geoip.dat} $out/usr/lib/nekoray/
-    install -Dm644 ./nekoray.png $out/share/icons/hicolor/128x128/apps/
+    install -Dm644 ./nekobox.png $out/share/icons/hicolor/128x128/apps/
 
-    wrapQtApp $out/usr/lib/nekoray/nekoray \
+    wrapQtApp $out/usr/lib/nekoray/nekobox \
       --add-flags "-- -appdata"
 
-    mv $out/usr/lib/nekoray/nekoray $out/bin/nekoray
+    mv $out/usr/lib/nekoray/nekobox $out/bin/nekobox
 
     runHook postInstall
   '';
