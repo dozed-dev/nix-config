@@ -66,6 +66,7 @@
     yubikey-manager-qt
     remmina
     nekoray
+    helvum
 
     # Desktop stuff
     telegram-desktop
