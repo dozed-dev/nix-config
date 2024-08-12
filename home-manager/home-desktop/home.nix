@@ -99,11 +99,15 @@
     nixd
     nodePackages.bash-language-server
 
+    # KDE shell
+    plasma5Packages.polonium
+
     # Theming
     kde-gtk-config
     kdePackages.qtstyleplugin-kvantum
-    libsForQt5.qtstyleplugin-kvantum
+    plasma5Packages.qtstyleplugin-kvantum
 
+    # Fonts
     ubuntu_font_family
     inter
     fira-code-nerdfont
