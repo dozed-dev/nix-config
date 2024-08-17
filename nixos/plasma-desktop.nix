@@ -39,6 +39,9 @@
     adwaita-icon-theme
     wl-clipboard
     kdePackages.kdialog
+    kdePackages.kdenetwork-filesharing
+    kdePackages.kio-zeroconf
+    kdePackages.kio-fuse
   ];
 
   # Fonts
