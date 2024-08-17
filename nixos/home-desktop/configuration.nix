@@ -16,6 +16,7 @@
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     #inputs.nixos-hardware.nixosModules.common-gpu-intel
     inputs.nixos-hardware.nixosModules.common-gpu-amd
+    inputs.chaotic.nixosModules.default
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
@@ -40,7 +41,8 @@
     "clearcpuid=304" # Disable AVX-512 to play The Finals
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # The kernel
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
 
   # Emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
