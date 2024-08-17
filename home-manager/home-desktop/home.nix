@@ -99,9 +99,6 @@
     nixd
     nodePackages.bash-language-server
 
-    # KDE shell
-    plasma5Packages.polonium
-
     # Theming
     kde-gtk-config
     kdePackages.qtstyleplugin-kvantum
