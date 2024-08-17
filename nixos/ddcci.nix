@@ -20,13 +20,24 @@
       }
     );
   in [ kernelPackages.ddcci-driver ];
-
   boot.kernelModules = [ "ddcci" "i2c-dev" ];
+
+  # Fix autoprobing
+  systemd.services.ddcci-autoprobing-fix = {
+    script = ''
+      echo 'ddcci 0x37' | tee /sys/class/drm/*/ddc/new_device
+    '';
+    wantedBy = [ "graphical.target" ];
+    restartIfChanged = false;
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+  };
 
   # i2c group
   users.groups.i2c = {};
 
   environment.systemPackages = with pkgs; [ ddcutil ];
-
   services.udev.packages = with pkgs; [ ddcutil ];
 }
