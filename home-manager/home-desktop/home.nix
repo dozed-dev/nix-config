@@ -129,13 +129,23 @@
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    enableVteIntegration = true;
+    history = {
+      save = 100000;
+    };
     oh-my-zsh = {
       enable = true;
-      plugins = [
-        "git"
-      ];
       theme = ""; # We are loading p10k as standalone plugin!
     };
+
+    initExtraFirst = ''
+      # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+      INSTANT_PROMPT="''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+      if [[ -r "$INSTANT_PROMPT" ]]; then source "$INSTANT_PROMPT"; fi
+    '';
     plugins = [
       {
         name = "powerlevel10k";
