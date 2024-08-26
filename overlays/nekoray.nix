@@ -45,15 +45,15 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/{share/icons/hicolor/128x128/apps,usr/lib/nekoray,bin}
-    install -Dm755 ./{nekobox_core,nekobox} $out/usr/lib/nekoray/
-    install -Dm644 ./{geosite.db,geosite.dat,geoip.db,geoip.dat} $out/usr/lib/nekoray/
+    mkdir -p $out/{share/icons/hicolor/128x128/apps,usr/lib/nekobox,bin}
+    install -Dm755 ./{nekobox_core,nekobox} $out/usr/lib/nekobox/
+    install -Dm644 ./{geosite.db,geosite.dat,geoip.db,geoip.dat} $out/usr/lib/nekobox/
     install -Dm644 ./nekobox.png $out/share/icons/hicolor/128x128/apps/
 
-    wrapQtApp $out/usr/lib/nekoray/nekobox \
+    wrapQtApp $out/usr/lib/nekobox/nekobox \
       --add-flags "-- -appdata"
 
-    mv $out/usr/lib/nekoray/nekobox $out/bin/nekobox
+    mv $out/usr/lib/nekobox/nekobox $out/bin/nekobox
 
     runHook postInstall
   '';
