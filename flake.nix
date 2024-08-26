@@ -49,9 +49,7 @@
       in nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
-        modules = [
-          ./nixos/home-desktop/configuration.nix
-        ];
+        modules = [./nixos/home-desktop/configuration.nix];
       };
     };
 
