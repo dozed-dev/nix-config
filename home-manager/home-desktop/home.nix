@@ -67,6 +67,8 @@
     remmina
     nekoray
     helvum
+    kdePackages.partitionmanager
+    kdePackages.filelight
 
     # Desktop stuff
     telegram-desktop
