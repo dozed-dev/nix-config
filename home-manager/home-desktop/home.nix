@@ -60,6 +60,7 @@
     inetutils
     rs-tftpd
     nmap
+    yt-dlp
 
     # GUI Tools
     yubikey-manager
