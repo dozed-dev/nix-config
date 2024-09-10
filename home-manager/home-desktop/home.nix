@@ -71,17 +71,22 @@
     kdePackages.partitionmanager
     kdePackages.filelight
 
-    # Desktop stuff
+    # Desktop/media
     telegram-desktop
     firefox
     ungoogled-chromium
     tor-browser
-    kate
-    krita
     mpv
     obs-studio
     qbittorrent
     unar
+
+    # Prod
+    godot_4
+    blender
+    krita
+    kate
+    libreoffice-qt6-fresh
 
     # Gaming
     steam
@@ -93,8 +98,6 @@
     helix
     lunarvim
     lazygit
-    godot_4
-    blender
     ansible
     python3
 
