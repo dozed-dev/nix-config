@@ -38,6 +38,7 @@
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
     wl-clipboard
+    steam-run
     kdePackages.kdialog
     kdePackages.kdenetwork-filesharing
     kdePackages.kio-zeroconf
