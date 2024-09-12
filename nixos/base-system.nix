@@ -21,6 +21,7 @@
     fd
     file
     tree
+    killall
   ];
 
   # SSH server. Very important if you're setting up a headless system.
