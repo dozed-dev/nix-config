@@ -35,6 +35,9 @@
     };
   };
 
+  # Preload
+  services.preload.enable = true;
+
   # OOM killer
   systemd.oomd = {
     enable = true;
