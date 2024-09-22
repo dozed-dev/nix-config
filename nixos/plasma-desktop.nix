@@ -39,7 +39,7 @@
 
   # GUI utils
   environment.systemPackages = with pkgs; [
-    adwaita-icon-theme
+    #adwaita-icon-theme
     wl-clipboard
     steam-run
     kdePackages.drkonqi
