@@ -34,11 +34,15 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  # Enable debuginfod for crash reports
+  services.nixseparatedebuginfod.enable = true;
+
   # GUI utils
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
     wl-clipboard
     steam-run
+    kdePackages.drkonqi
     kdePackages.kdialog
     kdePackages.kdenetwork-filesharing
     kdePackages.kio-zeroconf
