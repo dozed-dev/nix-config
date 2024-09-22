@@ -31,7 +31,6 @@
     ../ddcci.nix
     ../yubikey.nix
     ../base-system.nix
-    ../minecraft.nix
   ];
 
   # Bootloader.
