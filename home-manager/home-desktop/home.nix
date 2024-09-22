@@ -74,6 +74,7 @@
 
     # Desktop/media
     telegram-desktop
+    mumble
     firefox
     ungoogled-chromium
     tor-browser
