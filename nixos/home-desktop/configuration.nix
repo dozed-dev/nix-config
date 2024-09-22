@@ -31,6 +31,8 @@
     ../ddcci.nix
     ../yubikey.nix
     ../base-system.nix
+
+    #inputs.qiwi-minecraft-modpack.server
   ];
 
   # Bootloader.

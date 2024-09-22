@@ -23,7 +23,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Minecraft server
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    qiwi-minecraft-modpack.url = "git+file:///home/quitzka/dev/qiwi-modpack";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
