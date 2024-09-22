@@ -27,6 +27,12 @@
       config.allowUnfree = true;
     };
   };
+  stable-packages = final: _prev: {
+    stable = import inputs.nixpkgs-stable {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
   nekoray = final: _prev: {
     nekoray = _prev.libsForQt5.callPackage ./nekoray.nix {};
   };

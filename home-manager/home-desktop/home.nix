@@ -25,6 +25,7 @@
       outputs.overlays.nekoray
       outputs.overlays.gost3
       outputs.overlays.fjordlauncher
+      outputs.overlays.stable-packages
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
@@ -89,7 +90,7 @@
     libreoffice-qt6-fresh
 
     # Gaming
-    steam
+    stable.steam
     lutris
     wine
     fjordlauncher
