@@ -17,6 +17,7 @@
     #inputs.nixos-hardware.nixosModules.common-gpu-intel
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.chaotic.nixosModules.default
+    inputs.qiwi-minecraft-modpack.nixosModules.server
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
@@ -32,7 +33,6 @@
     ../yubikey.nix
     ../base-system.nix
 
-    #inputs.qiwi-minecraft-modpack.server
   ];
 
   # Bootloader.
