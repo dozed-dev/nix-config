@@ -91,7 +91,7 @@
     libreoffice-qt6-fresh
 
     # Gaming
-    stable.steam
+    steam
     lutris
     wine
     fjordlauncher
