@@ -4,7 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "nixpkgs/99dc8785f6a0adac95f5e2ab05cc2e1bf666d172";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
