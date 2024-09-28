@@ -5,6 +5,7 @@
     # Nixpkgs
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable-old.url = "nixpkgs/ad416d066ca1222956472ab7d0555a6946746a80";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
@@ -48,7 +49,7 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       home-desktop = let
-        nixpkgs = inputs.nixpkgs-unstable;
+        nixpkgs = inputs.nixpkgs-unstable-old;
       in nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <

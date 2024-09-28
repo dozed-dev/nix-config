@@ -316,6 +316,21 @@
     },
     "nixpkgs-unstable": {
       "locked": {
+        "lastModified": 1727492312,
+        "narHash": "sha256-oRkgc+DosM3HIl9el98TxF2rtliKHCNVw00nlQC7xYM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4471f9f67fe0f95f5fec4cc2ebac59fe32af2b62",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixpkgs-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs-unstable-old": {
+      "locked": {
         "lastModified": 1725432240,
         "narHash": "sha256-+yj+xgsfZaErbfYM3T+QvEE2hU7UuE+Jf0fJCJ8uPS0=",
         "owner": "NixOS",
@@ -348,8 +363,8 @@
     "nixpkgs_3": {
       "locked": {
         "lastModified": 0,
-        "narHash": "sha256-gI9kkaH0ZjakJOKrdjaI/VbaMEo9qBbSUl93DnU7f4c=",
-        "path": "/nix/store/cjz8w4dgc3rd2n3dqv5c208vygndjyba-source",
+        "narHash": "sha256-+yj+xgsfZaErbfYM3T+QvEE2hU7UuE+Jf0fJCJ8uPS0=",
+        "path": "/nix/store/6inj491lsap4ia7mmvn2gbh53jb27zq0-source",
         "type": "path"
       },
       "original": {
@@ -417,6 +432,7 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixpkgs-unstable-old": "nixpkgs-unstable-old",
         "qiwi-minecraft-modpack": "qiwi-minecraft-modpack"
       }
     },
