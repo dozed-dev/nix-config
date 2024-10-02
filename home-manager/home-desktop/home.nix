@@ -103,6 +103,8 @@
     lazygit
     ansible
     python3
+    android-tools
+    scrcpy
 
     # LSP
     nixd

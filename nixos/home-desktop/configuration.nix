@@ -32,6 +32,7 @@
     ../ddcci.nix
     ../yubikey.nix
     ../base-system.nix
+    ../android.nix
 
   ];
 
