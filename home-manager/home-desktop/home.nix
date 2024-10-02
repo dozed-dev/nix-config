@@ -82,6 +82,7 @@
     obs-studio
     qbittorrent
     unar
+    ffmpeg-full
 
     # Prod
     godot_4
