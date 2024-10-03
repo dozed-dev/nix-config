@@ -49,7 +49,7 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       home-desktop = let
-        nixpkgs = inputs.nixpkgs-unstable-old;
+        nixpkgs = inputs.nixpkgs-unstable;
       in nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
