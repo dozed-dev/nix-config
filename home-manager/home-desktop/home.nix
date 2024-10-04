@@ -23,7 +23,6 @@
       outputs.overlays.modifications
       # If you want to use modules from other flakes (such as nixos-hardware):
       outputs.overlays.nekoray
-      outputs.overlays.gost3
       outputs.overlays.fjordlauncher
       outputs.overlays.stable-packages
       # If you want to use overlays exported from other flakes:
@@ -53,7 +52,6 @@
   home.packages = with pkgs; [
     # Network tools
     tcping-go
-    gost3
     waypipe
     wireguard-tools
     dig
