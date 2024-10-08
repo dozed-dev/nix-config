@@ -1,5 +1,27 @@
 {
   "nodes": {
+    "buildNodeModules": {
+      "inputs": {
+        "nixpkgs": [
+          "qiwi-minecraft-modpack",
+          "drasl",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1707354861,
+        "narHash": "sha256-L10H5hh9S6y20c7AKuKJ2h9BczODqpTCoGEZBDPJhd0=",
+        "owner": "adisbladis",
+        "repo": "buildNodeModules",
+        "rev": "76c7c56dd9dcea355a8e2ebd0f228a8f2d1e1ee8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "adisbladis",
+        "repo": "buildNodeModules",
+        "type": "github"
+      }
+    },
     "chaotic": {
       "inputs": {
         "fenix": "fenix",
@@ -20,6 +42,25 @@
         "owner": "chaotic-cx",
         "ref": "nyxpkgs-unstable",
         "repo": "nyx",
+        "type": "github"
+      }
+    },
+    "drasl": {
+      "inputs": {
+        "buildNodeModules": "buildNodeModules",
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1725589592,
+        "narHash": "sha256-lb2EB4oPC1z0W4JcxFhNx5tiy0dxO65oyyigE6dZIBE=",
+        "owner": "unmojang",
+        "repo": "drasl",
+        "rev": "f85fb8195be5411645a86a2c04b86403b7d2108c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "unmojang",
+        "repo": "drasl",
         "type": "github"
       }
     },
@@ -240,7 +281,7 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1727142368,
@@ -374,6 +415,21 @@
     },
     "nixpkgs_4": {
       "locked": {
+        "lastModified": 1716633019,
+        "narHash": "sha256-xim1b5/HZYbWaZKyI7cn9TJCM6ewNVZnesRr00mXeS4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9d29cd266cebf80234c98dd0b87256b6be0af44e",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-23.11",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
         "lastModified": 1715266358,
         "narHash": "sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=",
         "owner": "nixos",
@@ -388,7 +444,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_6": {
       "locked": {
         "lastModified": 1726937504,
         "narHash": "sha256-bvGoiQBvponpZh8ClUcmJ6QnsNKw0EMrCQJARK3bI1c=",
@@ -405,16 +461,16 @@
     },
     "qiwi-minecraft-modpack": {
       "inputs": {
+        "drasl": "drasl",
         "flake-parts": "flake-parts",
         "nix-minecraft": "nix-minecraft",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1727644657,
-        "narHash": "sha256-XXUzI6A5D+GkDUmh1L2YTu2tjP8eqm9ULQsrb56ZN6c=",
-        "ref": "refs/heads/main",
-        "rev": "0465b6b758f6c03bef987ee3a41c3ca194f68214",
-        "revCount": 57,
+        "dirtyRev": "a9faaa6f188f0afacbfffc354e738b48dc213c7a-dirty",
+        "dirtyShortRev": "a9faaa6-dirty",
+        "lastModified": 1728385601,
+        "narHash": "sha256-NkS9Z4dtq2QuMXh41VIkvxjPprZRKyw3mLXrOviiwhA=",
         "type": "git",
         "url": "file:///home/quitzka/dev/qiwi-modpack"
       },
