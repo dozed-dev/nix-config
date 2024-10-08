@@ -54,4 +54,6 @@
     blacklist dvb_usb_rtl28xxu
   '';
   users.groups.plugdev = {};
+
+  services.flatpak.enable = true;
 }
