@@ -24,7 +24,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Minecraft server
-    qiwi-minecraft-modpack.url = "git+file:///home/quitzka/dev/qiwi-modpack";
+    qiwi-minecraft-modpack.url = "github:dozed-dev/qiwi-modpack";
 
     # Fjord launcher
     fjordlauncher.url = "github:unmojang/FjordLauncher";

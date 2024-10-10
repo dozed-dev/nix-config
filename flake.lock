@@ -397,15 +397,15 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1727142368,
-        "narHash": "sha256-0d8cr9/n/HRhWgrwBT/YiQrpkMIKMhM8Tc2coZfCx8g=",
-        "owner": "Infinidoge",
+        "lastModified": 1728516679,
+        "narHash": "sha256-pLA5+Or7L6j0fGQJlDnN3cqMy2OUrPG6CROPQ37w75I=",
+        "owner": "dozed-dev",
         "repo": "nix-minecraft",
-        "rev": "4ccf8d373be7382c436123189264a4e5e94dbcab",
+        "rev": "ae664f7ca6a613dc23a8d546be57a955298d7adb",
         "type": "github"
       },
       "original": {
-        "owner": "Infinidoge",
+        "owner": "dozed-dev",
         "repo": "nix-minecraft",
         "type": "github"
       }
@@ -626,16 +626,17 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "dirtyRev": "a9faaa6f188f0afacbfffc354e738b48dc213c7a-dirty",
-        "dirtyShortRev": "a9faaa6-dirty",
-        "lastModified": 1728385601,
-        "narHash": "sha256-NkS9Z4dtq2QuMXh41VIkvxjPprZRKyw3mLXrOviiwhA=",
-        "type": "git",
-        "url": "file:///home/quitzka/dev/qiwi-modpack"
+        "lastModified": 1728517643,
+        "narHash": "sha256-5NgFLhQLsbEZW57TWC2/5jgWt0pZAoVTTRGRyo7KFjY=",
+        "owner": "dozed-dev",
+        "repo": "qiwi-modpack",
+        "rev": "70187065cbeeca68b245ae9506dd71580f063ae5",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/quitzka/dev/qiwi-modpack"
+        "owner": "dozed-dev",
+        "repo": "qiwi-modpack",
+        "type": "github"
       }
     },
     "root": {
