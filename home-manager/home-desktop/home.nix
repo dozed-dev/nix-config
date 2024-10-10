@@ -23,7 +23,7 @@
       outputs.overlays.modifications
       # If you want to use modules from other flakes (such as nixos-hardware):
       outputs.overlays.nekoray
-      outputs.overlays.fjordlauncher
+      inputs.fjordlauncher.overlays.default
       outputs.overlays.stable-packages
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
