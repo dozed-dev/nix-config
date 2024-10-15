@@ -29,6 +29,16 @@
     # Fjord launcher
     fjordlauncher.url = "github:unmojang/FjordLauncher";
 
+    # bol-van/zapret (DPI bypass)
+    zapret = {
+      url = "github:aca/zapret-flake.nix";
+      inputs.zapret-src = {
+        url = "github:bol-van/zapret";
+        flake = false;
+      };
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";

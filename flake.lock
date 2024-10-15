@@ -651,7 +651,8 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixpkgs-unstable-old": "nixpkgs-unstable-old",
-        "qiwi-minecraft-modpack": "qiwi-minecraft-modpack"
+        "qiwi-minecraft-modpack": "qiwi-minecraft-modpack",
+        "zapret": "zapret"
       }
     },
     "rust-analyzer-src": {
@@ -683,6 +684,43 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "zapret": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "zapret-src": "zapret-src"
+      },
+      "locked": {
+        "lastModified": 1724497256,
+        "narHash": "sha256-wLOTVuN2d8tHAe69Dq4oAbOEyuIAAlNcdB0fmud+LSo=",
+        "owner": "aca",
+        "repo": "zapret-flake.nix",
+        "rev": "a713abab46b70dd198130ad3759baf0b7af48b2c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aca",
+        "repo": "zapret-flake.nix",
+        "type": "github"
+      }
+    },
+    "zapret-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1728994738,
+        "narHash": "sha256-/dKG9P5OXFppZiV1un2+g8G6Xsy9178f10YNagCIyGo=",
+        "owner": "bol-van",
+        "repo": "zapret",
+        "rev": "97a36f3c182c9dabdf7a501cea579b110b71710e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bol-van",
+        "repo": "zapret",
         "type": "github"
       }
     }
