@@ -140,8 +140,9 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableVteIntegration = true;
-    history = {
-      save = 100000;
+    history = rec {
+      size = 2147483647;
+      save = size;
     };
     oh-my-zsh = {
       enable = true;
