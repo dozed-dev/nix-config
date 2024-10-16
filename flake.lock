@@ -711,11 +711,11 @@
     "zapret-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1729092037,
-        "narHash": "sha256-RfwVTrXUFxUURs8/57rqykXiFXx5qa5VHzRw23PrCm4=",
+        "lastModified": 1729150856,
+        "narHash": "sha256-b48+qmXHdH6Fg3PkGGqV5nY0tQj3X8soRQA2zX/v0+8=",
         "owner": "bol-van",
         "repo": "zapret",
-        "rev": "fc0b8266e3e02c62af699b18c032800b0032866f",
+        "rev": "d97e7920cc79ff93a46a0ad30d8803a8e635157c",
         "type": "github"
       },
       "original": {
