@@ -41,10 +41,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelParams = [
-    "clearcpuid=304" # Disable AVX-512 to play The Finals
-  ];
-
   # The kernel
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
