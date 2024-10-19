@@ -22,6 +22,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nur.url = "github:nix-community/NUR";
 
     # Minecraft server
     qiwi-minecraft-modpack.url = "github:dozed-dev/qiwi-modpack";
