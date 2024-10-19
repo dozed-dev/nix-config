@@ -25,17 +25,23 @@
       INSTANT_PROMPT="''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
       if [[ -r "$INSTANT_PROMPT" ]]; then source "$INSTANT_PROMPT"; fi
     '';
-    plugins = [
+    plugins = let
+      fileToPlugin = {name, path}:
+        let filename = builtins.baseNameOf path; in {
+          inherit name;
+          src = pkgs.writeTextDir filename (builtins.readFile path);
+          file = filename;
+        };
+    in [
       {
         name = "powerlevel10k";
         src = pkgs.zsh-powerlevel10k;
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
-      {
+      (fileToPlugin {
         name = "powerlevel10k-config";
-        src = ./.;
-        file = "p10k.zsh";
-      }
+        path = ./p10k.zsh;
+      })
       {
         name = "zsh-nix-shell";
         file = "nix-shell.plugin.zsh";
