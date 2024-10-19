@@ -629,7 +629,24 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixpkgs-unstable-old": "nixpkgs-unstable-old",
         "qiwi-minecraft-modpack": "qiwi-minecraft-modpack",
+        "syberant-nur": "syberant-nur",
         "zapret": "zapret"
+      }
+    },
+    "syberant-nur": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719063035,
+        "narHash": "sha256-VdyJGvSmiNeMSG0JPYRIuPIdA2OuoxE2Zm+G0de3SVk=",
+        "owner": "syberant",
+        "repo": "nur-packages",
+        "rev": "c0b1a823454b9858b890e7ab25301cbc4f447305",
+        "type": "github"
+      },
+      "original": {
+        "owner": "syberant",
+        "repo": "nur-packages",
+        "type": "github"
       }
     },
     "systems": {
