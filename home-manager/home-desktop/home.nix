@@ -26,6 +26,7 @@
       outputs.overlays.nekoray
       inputs.fjordlauncher.overlays.default
       outputs.overlays.stable-packages
+      outputs.overlays.unstable-packages
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
@@ -79,7 +80,7 @@
     tor-browser
     mpv
     obs-studio
-    qbittorrent
+    unstable.qbittorrent
     unar
     ffmpeg-full
 
