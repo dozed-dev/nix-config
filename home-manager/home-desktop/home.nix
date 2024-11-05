@@ -104,6 +104,7 @@
     python3
     android-tools
     scrcpy
+    minicom
 
     # LSP
     nixd
