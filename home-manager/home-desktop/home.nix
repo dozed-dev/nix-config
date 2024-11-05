@@ -49,6 +49,11 @@
     homeDirectory = "/home/quitzka";
   };
 
+  programs.helix = {
+    enable = true;
+    defaultEditor = true;
+  };
+
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
@@ -98,7 +103,7 @@
     fjordlauncher
 
     # Dev
-    helix
+    neovim
     lunarvim
     lazygit
     ansible

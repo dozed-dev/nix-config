@@ -1,10 +1,6 @@
 { pkgs, ... }: {
   # Install git, neovim
   programs.git.enable = true;
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
 
   # Set Zsh as the default user shell for all users
   programs.zsh.enable = true;
