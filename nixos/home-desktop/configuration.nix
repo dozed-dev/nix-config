@@ -44,14 +44,6 @@
   # The kernel
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  # Swap
-  swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 16*1024; # Size is in megabytes
-    }
-  ];
-
   # Emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
