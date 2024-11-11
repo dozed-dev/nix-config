@@ -95,6 +95,7 @@
     krita
     kate
     libreoffice-qt6-fresh
+    orca-slicer
 
     # Gaming
     steam
