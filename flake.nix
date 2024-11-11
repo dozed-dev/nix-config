@@ -66,7 +66,7 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       home-desktop = let
-        nixpkgs = inputs.nixpkgs-stable;
+        nixpkgs = inputs.nixpkgs-unstable;
       in nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
@@ -78,8 +78,8 @@
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       "quitzka@home-desktop" = let
-        nixpkgs = inputs.nixpkgs-stable;
-        home-manager = inputs.home-manager-stable;
+        nixpkgs = inputs.nixpkgs-unstable;
+        home-manager = inputs.home-manager-unstable;
       in home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};

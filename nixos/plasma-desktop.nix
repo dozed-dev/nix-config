@@ -52,7 +52,7 @@
   # Fonts
   fonts.packages = with pkgs; [
     fira-code
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-color-emoji
     inter
   ];

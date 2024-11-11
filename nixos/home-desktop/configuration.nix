@@ -34,7 +34,6 @@
     ../yubikey.nix
     ../base-system.nix
     ../android.nix
-    ../zapret.nix
   ];
 
   # Bootloader.
