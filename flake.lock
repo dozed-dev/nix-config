@@ -613,11 +613,11 @@
     "zapret-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1731604807,
-        "narHash": "sha256-iJ1ZFScoc0owYRA9jXHHKDCeRYnvCLuaYFIKEWdHL4U=",
+        "lastModified": 1731675119,
+        "narHash": "sha256-OjmgAaom7HPwpevl0NBwARtGMpn4svqjsArGd+CAYUQ=",
         "owner": "bol-van",
         "repo": "zapret",
-        "rev": "5d6c91f7e9956738bdb5e1ceff065cdbeded5005",
+        "rev": "677feecada7f523ad59ee74f2996d986eb01bd27",
         "type": "github"
       },
       "original": {
