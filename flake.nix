@@ -29,16 +29,6 @@
     # Fjord launcher
     fjordlauncher.url = "github:unmojang/FjordLauncher";
 
-    # bol-van/zapret (DPI bypass)
-    zapret = {
-      url = "github:aca/zapret-flake.nix";
-      inputs.zapret-src = {
-        url = "github:bol-van/zapret";
-        flake = false;
-      };
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     syberant-nur = {
       url = "github:syberant/nur-packages";
       flake = false;
