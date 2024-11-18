@@ -82,7 +82,7 @@
     mumble
     unstable.firefox
     ungoogled-chromium
-    tor-browser
+    unstable.tor-browser
     mpv
     obs-studio
     unstable.qbittorrent
@@ -105,7 +105,6 @@
 
     # Dev
     neovim
-    lunarvim
     lazygit
     ansible
     python3
@@ -114,8 +113,8 @@
     minicom
 
     # LSP
-    nixd
-    nodePackages.bash-language-server
+    unstable.nixd
+    unstable.nodePackages.bash-language-server
 
     # Theming
     kde-gtk-config
@@ -123,9 +122,9 @@
     plasma5Packages.qtstyleplugin-kvantum
 
     # Fonts
-    ubuntu_font_family
-    inter
-    fira-code-nerdfont
+    unstable.ubuntu_font_family
+    unstable.inter
+    unstable.fira-code-nerdfont
   ];
 
   fonts.fontconfig.enable = true;
