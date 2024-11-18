@@ -78,9 +78,9 @@
     kdePackages.filelight
 
     # Desktop/media
-    telegram-desktop
+    unstable.telegram-desktop
     mumble
-    firefox
+    unstable.firefox
     ungoogled-chromium
     tor-browser
     mpv
