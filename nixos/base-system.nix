@@ -45,7 +45,7 @@
   programs.virt-manager.enable = true;
 
   # RTL-SDR
-  services.udev.packages = [ pkgs.rtl-sdr ];
+  services.udev.packages = [ pkgs.rtl-sdr pkgs.ledger-udev-rules ];
   boot.extraModprobeConfig = ''
     blacklist dvb_usb_rtl28xxu
   '';
