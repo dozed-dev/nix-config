@@ -88,6 +88,7 @@
     unstable.qbittorrent
     unar
     ffmpeg-full
+    f3d
 
     # Prod
     godot_4
@@ -96,6 +97,7 @@
     kate
     libreoffice-qt6-fresh
     orca-slicer
+    unstable.freecad
 
     # Gaming
     steam
