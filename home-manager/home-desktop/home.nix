@@ -126,7 +126,7 @@
     # Fonts
     unstable.ubuntu_font_family
     unstable.inter
-    unstable.fira-code-nerdfont
+    unstable.nerd-fonts.fira-code
   ];
 
   fonts.fontconfig.enable = true;
