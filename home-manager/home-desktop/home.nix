@@ -96,7 +96,7 @@
     krita
     kate
     libreoffice-qt6-fresh
-    orca-slicer
+    stable.orca-slicer
     unstable.freecad
 
     # Gaming
