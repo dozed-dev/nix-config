@@ -26,6 +26,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
+    ./networking.nix
     ../nfs-sharing.nix
     ../locale.nix
     ../nixpkgs.nix
@@ -50,13 +51,6 @@
   boot.kernel.sysctl = {
     "kernel.sysrq" = 128;
   };
-
-  networking.hostName = "home-desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   users.users.quitzka = {
     isNormalUser = true;
