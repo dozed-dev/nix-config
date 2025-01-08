@@ -23,6 +23,9 @@
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+    # microvm
+    microvm.url = "github:astro/microvm.nix";
+
     # Minecraft server
     qiwi-minecraft-modpack.url = "github:dozed-dev/qiwi-modpack";
 

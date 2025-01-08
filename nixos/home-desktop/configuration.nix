@@ -17,6 +17,7 @@
     #inputs.nixos-hardware.nixosModules.common-gpu-intel
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.chaotic.nixosModules.default
+    inputs.microvm.nixosModules.host
     inputs.qiwi-minecraft-modpack.nixosModules.server
     inputs.qiwi-minecraft-modpack.nixosModules.drasl
 
@@ -27,6 +28,7 @@
     ./hardware-configuration.nix
 
     ./networking.nix
+    ./microvm.nix
     ../nfs-sharing.nix
     ../locale.nix
     ../nixpkgs.nix
