@@ -13,28 +13,34 @@
     wait-online.enable = false;
 
     netdevs = {
-      "br0" = {
+      "10-microvm" = {
         netdevConfig = {
-          Name = "br0";
+          Name = "microvm-br0";
           Kind = "bridge";
         };
       };
     };
 
     networks = {
-      "10-lan" = {
-        matchConfig.Name = ["vm-*"];# "enp112s0"];
+      "10-microvm" = {
+        matchConfig.Name = "microvm-br0";
         networkConfig = {
-          Bridge = "br0";
+          Address = ["" ""];
+          DHCPServer = true;
+          IPv6SendRA = true;
         };
+        addresses = [
+          { Address = "10.101.0.1/24"; }
+          { Address = "fd26:5013::1/64"; }
+        ];
+        ipv6Prefixes = [
+          { Prefix = "fd26:5013::/64"; }
+        ];
       };
-      "10-lan-bridge" = {
-        matchConfig.Name = "br0";
-        networkConfig = {
-          Address = ["10.101.0.1/24" "fd26:5013::1/64"];
-          DHCP = "no";
-        };
-        linkConfig.RequiredForOnline = "routable";
+      "11-microvm" = {
+        matchConfig.Name = "vm-*";
+        # Attach to the bridge that was configured above
+        networkConfig.Bridge = "microvm-br0";
       };
       "20-unmanaged" = {
         matchConfig.Name = "enp*";
