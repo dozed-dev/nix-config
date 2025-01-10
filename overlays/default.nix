@@ -39,4 +39,7 @@
   gost3 = final: _prev: {
     gost3 = _prev.libsForQt5.callPackage ./gost3.nix {};
   };
+  rembg = final: _prev: {
+    rembg = _prev.callPackage ./rembg.nix {};
+  };
 }

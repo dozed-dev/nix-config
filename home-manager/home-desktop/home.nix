@@ -24,6 +24,7 @@
       outputs.overlays.modifications
       # If you want to use modules from other flakes (such as nixos-hardware):
       outputs.overlays.nekoray
+      outputs.overlays.rembg
       inputs.fjordlauncher.overlays.default
       outputs.overlays.stable-packages
       outputs.overlays.unstable-packages
@@ -89,6 +90,7 @@
     unar
     ffmpeg-full
     f3d
+    rembg
 
     # Prod
     godot_4
