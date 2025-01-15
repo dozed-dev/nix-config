@@ -67,7 +67,7 @@
     inetutils
     rs-tftpd
     nmap
-    yt-dlp
+    unstable.yt-dlp
 
     # GUI Tools
     yubikey-manager
@@ -130,6 +130,10 @@
     unstable.inter
     unstable.nerd-fonts.fira-code
   ];
+
+  xdg.configFile."yt-dlp/config".text = ''
+    --extractor-args "youtube:player-client=tv,mweb"
+  '';
 
   fonts.fontconfig.enable = true;
 
