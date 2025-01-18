@@ -90,7 +90,7 @@
     unar
     ffmpeg-full
     f3d
-    rembg
+    #rembg
 
     # Prod
     godot_4
