@@ -18,6 +18,7 @@
     file
     tree
     killall
+    virtiofsd
   ];
 
   # SSH server. Very important if you're setting up a headless system.
@@ -43,6 +44,7 @@
   # Virtualization host
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # RTL-SDR
   services.udev.packages = [ pkgs.rtl-sdr pkgs.ledger-udev-rules ];
