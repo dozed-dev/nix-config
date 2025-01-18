@@ -42,12 +42,7 @@
   };
 
   outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    nixos-hardware,
-    chaotic,
-    ...
+    self, ...
   } @ inputs: let
     inherit (self) outputs;
   in {
