@@ -86,7 +86,7 @@
     unstable.tor-browser
     mpv
     obs-studio
-    unstable.qbittorrent
+    qbittorrent
     unar
     ffmpeg-full
     f3d
