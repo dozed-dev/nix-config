@@ -115,6 +115,7 @@
     android-tools
     scrcpy
     minicom
+    usbutils
 
     # LSP
     unstable.nixd
