@@ -44,7 +44,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # The kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # Emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
