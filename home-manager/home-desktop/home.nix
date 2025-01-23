@@ -130,6 +130,28 @@
     unstable.nerd-fonts.fira-code
   ];
 
+  services.syncthing = {
+    enable = true;
+    overrideDevices = true;
+    overrideFolders = false;
+    settings = {
+      devices = {
+        "pixel".id = "ZDEBKB5-RWBSLHI-W5CMYTU-IWHINHF-QMTAJ6F-JTLYLHK-DXS6LDF-4YUILQB";
+      };
+      folders = {
+        "Notes" = {
+          id = "1niqp-yl9hp";
+          path = "/home/quitzka/Documents/Notes";
+          devices = ["pixel"];
+          versioning = {
+            type = "simple";
+            params.keep = 10;
+          };
+        };
+      };
+    };
+  };
+
   xdg.configFile."yt-dlp/config".text = ''
     --extractor-args "youtube:player-client=tv,mweb"
   '';
