@@ -42,4 +42,8 @@
   rembg = final: _prev: {
     rembg = _prev.callPackage ./rembg.nix {};
   };
+  orca-slicer-stable = final: _prev: {
+    orca-slicer-stable = _prev.callPackage ./orca-slicer.nix {};
+  };
+
 }
