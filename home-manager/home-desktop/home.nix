@@ -26,7 +26,6 @@
       inputs.fjordlauncher.overlays.default
       outputs.overlays.stable-packages
       outputs.overlays.unstable-packages
-      outputs.overlays.orca-slicer-stable
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
@@ -97,7 +96,7 @@
     krita
     kate
     libreoffice-qt6-fresh
-    orca-slicer-stable
+    stable.orca-slicer
     unstable.freecad
 
     # Gaming
