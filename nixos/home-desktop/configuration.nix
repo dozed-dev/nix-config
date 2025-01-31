@@ -51,7 +51,7 @@
 
   # Sysrq
   boot.kernel.sysctl = {
-    "kernel.sysrq" = 128;
+    "kernel.sysrq" = 1;
   };
 
   hardware.graphics = let fn = oldAttrs: {
