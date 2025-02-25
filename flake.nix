@@ -20,6 +20,10 @@
 
     # Hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    t480-fp-sensor = {
+      url = "github:ahbnr/nixos-06cb-009a-fingerprint-sensor";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 

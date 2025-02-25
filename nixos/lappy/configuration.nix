@@ -20,6 +20,7 @@
     ./hardware-configuration.nix
     ./networking.nix
 
+    ../fprint.nix
     ../locale.nix
     ../nixpkgs.nix
     ../plasma-desktop.nix
