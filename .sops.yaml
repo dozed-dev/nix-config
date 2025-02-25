@@ -1,0 +1,17 @@
+keys:
+  - &lappy age19t69ax0ayyjr3639r5wzvj7jz2a5knwhsl3mw5zrwjm5djftgapsyef2qe
+  - &hw_main age1yubikey1qdfgajsn8ez9lzqv9tlfvj6de87f7njlna9vtwyfhrg5p03hj6he7u7x584
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *hw_main
+  - path_regex: secrets/lappy/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *hw_main
+      - *lappy
+  - path_regex: .*\.bin$
+    key_groups:
+    - age:
+      - *lappy

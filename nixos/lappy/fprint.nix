@@ -1,7 +1,14 @@
-{pkgs, inputs, ...}: {
+{inputs, config, ...}: {
   imports = [
     inputs.t480-fp-sensor.nixosModules."06cb-009a-fingerprint-sensor"
+    ../sops.nix
   ];
+
+  sops.secrets.lappy-fp-calib = {
+    format = "binary";
+    sopsFile = ../../secrets/lappy/fingerprint-calibration-data.bin;
+  };
+
   # Start the driver at boot
   systemd.services.fprintd = {
     wantedBy = [ "multi-user.target" ];
@@ -12,7 +19,7 @@
     enable = true;
     backend = "python-validity";
     #backend = "libfprint-tod";
-    #calib-data-file = ~/Documents/fingerprint-calibration-data.bin;
+    #calib-data-file = config.sops.secrets.lappy-fp-calib.path;
   };
 
   # Install the driver
