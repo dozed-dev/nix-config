@@ -47,11 +47,11 @@
   virtualisation.spiceUSBRedirection.enable = true;
 
   # RTL-SDR
-  services.udev.packages = [ pkgs.rtl-sdr pkgs.ledger-udev-rules ];
-  boot.extraModprobeConfig = ''
-    blacklist dvb_usb_rtl28xxu
-  '';
-  users.groups.plugdev = {};
+  #services.udev.packages = [ pkgs.rtl-sdr pkgs.ledger-udev-rules ];
+  #boot.extraModprobeConfig = ''
+  #  blacklist dvb_usb_rtl28xxu
+  #'';
+  #users.groups.plugdev = {};
 
   services.flatpak.enable = true;
 }

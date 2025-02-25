@@ -60,6 +60,13 @@
         # > Our main nixos configuration file <
         modules = [./nixos/home-desktop/configuration.nix];
       };
+      lappy = let
+        nixpkgs = inputs.nixpkgs-unstable;
+      in nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        # > Our main nixos configuration file <
+        modules = [./nixos/lappy/configuration.nix];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
@@ -73,6 +80,15 @@
         extraSpecialArgs = {inherit inputs outputs;};
         # > Our main home-manager configuration file <
         modules = [./home-manager/home-desktop/home.nix];
+      };
+      "quitzka@lappy" = let
+        home-manager = inputs.home-manager-unstable;
+        nixpkgs = home-manager.inputs.nixpkgs;
+      in home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        # > Our main home-manager configuration file <
+        modules = [./home-manager/lappy/home.nix];
       };
     };
   };
