@@ -11,6 +11,8 @@
   services."06cb-009a-fingerprint-sensor" = {
     enable = true;
     backend = "python-validity";
+    #backend = "libfprint-tod";
+    #calib-data-file = ~/Documents/fingerprint-calibration-data.bin;
   };
 
   # Install the driver
