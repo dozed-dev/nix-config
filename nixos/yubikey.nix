@@ -2,7 +2,7 @@
 
   services.pcscd.enable = true;
   environment.systemPackages = with pkgs; [
-    yubikey-manager
+    yubioath-flutter
     pcsclite
     pam_u2f
   ];
