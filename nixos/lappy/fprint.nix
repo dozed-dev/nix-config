@@ -1,21 +1,17 @@
-{inputs, config, ...}: {
+{pkgs, inputs, ...}: {
   imports = [
     inputs.t480-fp-sensor.nixosModules."06cb-009a-fingerprint-sensor"
-    ../sops.nix
   ];
-
-  sops.secrets.lappy-fp-calib = {
-    format = "binary";
-    sopsFile = ../../secrets/lappy/fingerprint-calibration-data.bin;
-    mode = "0444";
-    owner = config.users.users.nobody.name;
-    group = config.users.users.nobody.group;
+  # Start the driver at boot
+  systemd.services.fprintd = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.Type = "simple";
   };
-
+  
   services."06cb-009a-fingerprint-sensor" = {
     enable = true;
-    #backend = "python-validity";
-    backend = "libfprint-tod";
-    calib-data-file = /var/lib/python-validity/calib-data.bin;
+    backend = "python-validity";
+    #backend = "libfprint-tod";
+    #calib-data-file = ~/Documents/fingerprint-calibration-data.bin;
   };
 }
