@@ -14,8 +14,8 @@
 
   services."06cb-009a-fingerprint-sensor" = {
     enable = true;
-    backend = "python-validity";
-    #backend = "libfprint-tod";
-    #calib-data-file = config.sops.secrets.lappy-fp-calib.path;
+    #backend = "python-validity";
+    backend = "libfprint-tod";
+    calib-data-file = /var/lib/python-validity/calib-data.bin;
   };
 }
