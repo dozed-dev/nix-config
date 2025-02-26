@@ -27,6 +27,12 @@
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.darwin.follows = "";
+    };
+
     # microvm
     microvm.url = "github:astro/microvm.nix";
 
