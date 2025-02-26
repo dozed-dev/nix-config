@@ -6,7 +6,7 @@
 
   sops.secrets.lappy-fp-calib = {
     format = "binary";
-    sopsFile = ../../secrets/lappy/fingerprint-calibration-data.bin;
+    sopsFile = ../../secrets/lappy/calib-data.bin;
     mode = "0444";
     owner = config.users.users.nobody.name;
     group = config.users.users.nobody.group;
@@ -16,6 +16,6 @@
     enable = true;
     #backend = "python-validity";
     backend = "libfprint-tod";
-    calib-data-file = /var/lib/python-validity/calib-data.bin;
+    calib-data-file = config.sops.secrets.lappy-fp-calib.path;
   };
 }
