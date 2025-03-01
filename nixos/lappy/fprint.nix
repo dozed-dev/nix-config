@@ -10,6 +10,8 @@
     enable = true;
     #backend = "python-validity";
     backend = "libfprint-tod";
-    calib-data-file = config.age.secrets.calib-data.path;
+    calib-data-file = /var/lib/python-validity/calib-data.bin;
+    #calib-data-file = builtins.readFile config.age.secrets.calib-data.path;
   };
+
 }

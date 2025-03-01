@@ -25,7 +25,7 @@
     ../locale.nix
     ../nixpkgs.nix
     ../plasma-desktop.nix
-    ../yubikey.nix
+    #../yubikey.nix
     ../base-system.nix
   ];
 
