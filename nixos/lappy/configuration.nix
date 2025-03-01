@@ -41,6 +41,8 @@
     "kernel.sysrq" = 1;
   };
 
+  hardware.graphics.enable32Bit = true;
+
   users.users.quitzka = {
     isNormalUser = true;
     description = "quitzka";
