@@ -1,10 +1,19 @@
 { pkgs, ... }: {
-  # Install git, neovim
-  programs.git.enable = true;
-
-  # Set Zsh as the default user shell for all users
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
+  programs.git.enable = true;
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # The kernel
+  boot.kernelPackages = pkgs.linuxPackages;
+
+  # Sysrq
+  boot.kernel.sysctl = {
+    "kernel.sysrq" = 1;
+  };
 
   # Other basic system utils
   environment.systemPackages = with pkgs; [
@@ -33,6 +42,16 @@
     };
   };
 
+  users.users.quitzka = {
+    isNormalUser = true;
+    description = "quitzka";
+    openssh.authorizedKeys.keys = [
+      # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
+    ];
+    extraGroups = [ "networkmanager" "wheel" "i2c" "libvirtd" "dialout" "plugdev" ];
+    shell = pkgs.zsh;
+  };
+
   # Preload
   services.preload.enable = true;
 
@@ -55,4 +74,5 @@
   #users.groups.plugdev = {};
 
   services.flatpak.enable = true;
+  system.autoUpgrade.enable = true;
 }

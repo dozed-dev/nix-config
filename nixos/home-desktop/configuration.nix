@@ -36,20 +36,8 @@
     ../android.nix
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # The kernel
-  boot.kernelPackages = pkgs.linuxPackages;
-
   # Emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-  # Sysrq
-  boot.kernel.sysctl = {
-    "kernel.sysrq" = 1;
-  };
 
   hardware.graphics = let fn = oldAttrs: {
     patches = oldAttrs.patches ++ [
@@ -79,18 +67,8 @@ index 1e97b19..519a9e5 100644
     package32 = (pkgs.pkgsi686Linux.mesa.overrideAttrs fn).drivers;
   };
 
-  users.users.quitzka = {
-    isNormalUser = true;
-    description = "quitzka";
-    openssh.authorizedKeys.keys = [
-      # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-    ];
-    extraGroups = [ "networkmanager" "wheel" "i2c" "libvirtd" "dialout" "plugdev" ];
-  };
-
   environment.systemPackages = with pkgs; [
     apparmor-utils
   ];
 
-  system.autoUpgrade.enable = true;
 }
