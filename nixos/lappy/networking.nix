@@ -1,6 +1,4 @@
 {
-  ...
-}: {
   networking.hostName = "lappy"; # Define your hostname.
 
   # Enable NetworkManager

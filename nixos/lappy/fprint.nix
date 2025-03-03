@@ -1,4 +1,4 @@
-{config, inputs, ...}: {
+{inputs, ...}: {
   imports = [
     inputs.t480-fp-sensor.nixosModules."06cb-009a-fingerprint-sensor"
   ];
