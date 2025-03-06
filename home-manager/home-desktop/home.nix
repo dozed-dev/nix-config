@@ -12,7 +12,6 @@
     rs-tftpd
     godot_4
     blender
-    kate
     orca-slicer
 
     # Gaming
@@ -20,11 +19,11 @@
     lutris
     wine
     fjordlauncher
+
     neovim
     ansible
     android-tools
     scrcpy
-    kde-gtk-config
   ];
   services.syncthing = {
     enable = true;
@@ -47,5 +46,4 @@
       };
     };
   };
-  home.stateVersion = "23.11";
 }

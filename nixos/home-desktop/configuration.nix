@@ -25,8 +25,7 @@
     ./hardware-configuration.nix
 
     ./networking.nix
-    ./microvm.nix
-    ../nfs-sharing.nix
+    #./microvm.nix
     ../locale.nix
     ../nixpkgs.nix
     ../plasma-desktop.nix
