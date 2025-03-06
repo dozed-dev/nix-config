@@ -30,7 +30,7 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.darwin.follows = "";
+      inputs.darwin.follows = ""; # disable macos for faster download
     };
 
     # microvm
