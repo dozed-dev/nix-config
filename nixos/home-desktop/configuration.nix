@@ -38,34 +38,6 @@
   # Emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  hardware.graphics = let fn = oldAttrs: {
-    patches = oldAttrs.patches ++ [
-      (pkgs.writeText "crash-fix.patch" ''
-diff --git a/src/gallium/drivers/radeonsi/si_pipe.c b/src/gallium/drivers/radeonsi/si_pipe.c
-index 1e97b19..519a9e5 100644
---- a/src/gallium/drivers/radeonsi/si_pipe.c
-+++ b/src/gallium/drivers/radeonsi/si_pipe.c
-@@ -200,6 +200,9 @@ static void si_destroy_context(struct pipe_context *context)
- {
-    struct si_context *sctx = (struct si_context *)context;
- 
-+   context->set_debug_callback(context, NULL);
-+
-+
-    /* Unreference the framebuffer normally to disable related logic
-     * properly.
-     */
-
-      '')
-    ];
-    #lib.filter (p: !builtins.match ".*cross_clc.patch.*" p)
-  };
-  in {
-    enable = true;
-    package = (pkgs.mesa.overrideAttrs fn).drivers;
-    package32 = (pkgs.pkgsi686Linux.mesa.overrideAttrs fn).drivers;
-  };
-
   environment.systemPackages = with pkgs; [
     apparmor-utils
   ];
