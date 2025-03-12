@@ -61,6 +61,7 @@
     unstable.telegram-desktop
     mumble
     unstable.firefox
+    unstable.librewolf
     ungoogled-chromium
     unstable.tor-browser
     mpv
