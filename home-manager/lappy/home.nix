@@ -16,6 +16,7 @@
     libreoffice-qt6-fresh
     #orca-slicer
     unstable.freecad
+    orca-slicer
 
     # Gaming
     steam
