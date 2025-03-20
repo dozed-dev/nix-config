@@ -16,7 +16,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./networking.nix
-    ./fprint.nix
+    #./fprint.nix
 
     ../locale.nix
     ../nixpkgs.nix
