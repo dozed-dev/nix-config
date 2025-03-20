@@ -33,6 +33,7 @@
     ../yubikey.nix
     ../base-system.nix
     ../android.nix
+    ../podman.nix
   ];
 
   # Emulation
