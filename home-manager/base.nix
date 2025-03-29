@@ -50,7 +50,6 @@
 
     # GUI Tools
     yubikey-manager
-    yubikey-manager-qt
     remmina
     nekoray
     helvum
