@@ -33,5 +33,8 @@
     }
   ];
 
+  boot.resumeDevice = "/dev/disk/by-uuid/03e38f93-77dc-442f-960d-b226e94a56cb"; # unlocked dm-crypt partition
+  boot.kernelParams = ["resume_offset=16336896"];
+
   system.autoUpgrade.enable = true;
 }
