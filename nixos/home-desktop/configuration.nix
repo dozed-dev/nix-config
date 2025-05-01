@@ -34,6 +34,7 @@
     ../base-system.nix
     ../android.nix
     ../podman.nix
+    ../ld.nix
   ];
 
   # Emulation
