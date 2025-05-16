@@ -18,6 +18,13 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    # Disko
+    
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     # Hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     t480-fp-sensor = {

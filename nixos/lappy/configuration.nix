@@ -9,6 +9,7 @@
     # If you want to use modules from other flakes (such as nixos-hardware):
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480
     inputs.agenix.nixosModules.default
+    inputs.disko.nixosModules.disko
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
