@@ -3,10 +3,6 @@
   users.defaultUserShell = pkgs.zsh;
   programs.git.enable = true;
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   # The kernel
   boot.kernelPackages = pkgs.linuxPackages;
 
