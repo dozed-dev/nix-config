@@ -27,8 +27,6 @@
     ./disko-config.nix
   ];
 
-  disko.devices.disk.main.device = "/dev/nvme0n1";
-
   hardware.graphics.enable32Bit = true;
   swapDevices = [
     {
