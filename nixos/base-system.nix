@@ -57,11 +57,6 @@
     enableUserSlices = true;
   };
 
-  # Virtualization host
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
-
   # RTL-SDR
   #services.udev.packages = [ pkgs.rtl-sdr pkgs.ledger-udev-rules ];
   #boot.extraModprobeConfig = ''

@@ -17,6 +17,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./networking.nix
+    ./disko-config.nix
     #./fprint.nix
 
     ../locale.nix
@@ -24,7 +25,7 @@
     ../plasma-desktop.nix
     #../yubikey.nix
     ../base-system.nix
-    ./disko-config.nix
+    ../virt.nix
   ];
 
   hardware.graphics.enable32Bit = true;

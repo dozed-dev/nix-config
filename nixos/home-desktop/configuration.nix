@@ -35,6 +35,7 @@
     ../android.nix
     ../podman.nix
     ../ld.nix
+    ../virt.nix
   ];
 
   # Bootloader.
