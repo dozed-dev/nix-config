@@ -23,5 +23,7 @@
     lutris
     wine
     #fjordlauncher
+
+    flashprog
   ];
 }
