@@ -491,21 +491,6 @@
         "type": "indirect"
       }
     },
-    "nixpkgs-unstable-old": {
-      "locked": {
-        "lastModified": 1725432240,
-        "narHash": "sha256-+yj+xgsfZaErbfYM3T+QvEE2hU7UuE+Jf0fJCJ8uPS0=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "ad416d066ca1222956472ab7d0555a6946746a80",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "rev": "ad416d066ca1222956472ab7d0555a6946746a80",
-        "type": "indirect"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1743583204,
@@ -617,7 +602,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "nixpkgs-unstable-old": "nixpkgs-unstable-old",
         "qiwi-minecraft-modpack": "qiwi-minecraft-modpack",
         "syberant-nur": "syberant-nur",
         "t480-fp-sensor": "t480-fp-sensor"

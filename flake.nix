@@ -5,7 +5,6 @@
     # Nixpkgs
     nixpkgs-stable.url = "nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
-    nixpkgs-unstable-old.url = "nixpkgs/ad416d066ca1222956472ab7d0555a6946746a80";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
