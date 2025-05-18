@@ -47,8 +47,8 @@
   };
   boot.extraModprobeConfig = "options thinkpad_acpi force_load=1";
 
-  #boot.resumeDevice = "/dev/disk/by-uuid/03e38f93-77dc-442f-960d-b226e94a56cb"; # unlocked dm-crypt partition
-  #boot.kernelParams = ["resume_offset=16336896"];
+  boot.resumeDevice = "/dev/disk/by-uuid/00bd9f5e-8eb8-483e-a6b4-890de72c3506"; # unlocked dm-crypt partition
+  boot.kernelParams = ["resume_offset=58687488"];
 
   system.autoUpgrade.enable = true;
 }
