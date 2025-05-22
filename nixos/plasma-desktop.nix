@@ -44,6 +44,7 @@
     kdePackages.kdenetwork-filesharing
     kdePackages.kio-zeroconf
     kdePackages.kio-fuse
+    polonium
   ];
 
   # Fonts
