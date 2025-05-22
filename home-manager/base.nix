@@ -15,6 +15,7 @@
     # ./nvim.nix
     ./shell/zsh.nix
     ./helix.nix
+    ./plasma.nix
   ];
 
   nixpkgs = {
