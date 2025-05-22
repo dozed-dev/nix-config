@@ -44,7 +44,17 @@
     kdePackages.kdenetwork-filesharing
     kdePackages.kio-zeroconf
     kdePackages.kio-fuse
+
+    kdePackages.partitionmanager
+    kdePackages.filelight
+    kdePackages.kate
+
     polonium
+
+    # Theming
+    kdePackages.kde-gtk-config
+    kdePackages.qtstyleplugin-kvantum
+    plasma5Packages.qtstyleplugin-kvantum
   ];
 
   # Fonts

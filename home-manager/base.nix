@@ -53,8 +53,6 @@
     remmina
     nekoray
     helvum
-    kdePackages.partitionmanager
-    kdePackages.filelight
 
     # Desktop/media
     unstable.telegram-desktop
@@ -73,7 +71,6 @@
 
     # Prod
     krita
-    kdePackages.kate
     libreoffice-qt6-fresh
     #orca-slicer
     unstable.freecad
@@ -87,11 +84,6 @@
     # LSP
     unstable.nixd
     unstable.nodePackages.bash-language-server
-
-    # Theming
-    kdePackages.kde-gtk-config
-    kdePackages.qtstyleplugin-kvantum
-    plasma5Packages.qtstyleplugin-kvantum
 
     # Fonts
     unstable.ubuntu_font_family
