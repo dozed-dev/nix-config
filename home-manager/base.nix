@@ -99,13 +99,10 @@
     unstable.nerd-fonts.fira-code
   ];
 
-  xdg.configFile."yt-dlp/config".text = ''
-    --extractor-args "youtube:player-client=tv,mweb"
-  '';
+  programs.ghostty = {
+    enable = true;
+  };
 
-  fonts.fontconfig.enable = true;
-
-  # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
@@ -113,6 +110,11 @@
     userEmail = "dev.dozed@aleeas.com";
   };
 
+  xdg.configFile."yt-dlp/config".text = ''
+    --extractor-args "youtube:player-client=tv,mweb"
+  '';
+
+  fonts.fontconfig.enable = true;
 
   # VM host
   dconf.settings = {
