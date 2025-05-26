@@ -31,7 +31,7 @@
   hardware.graphics.enable32Bit = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-
+  services.blueman.enable = true;
   swapDevices = [
     {
       device = "/var/lib/swapfile";
@@ -49,6 +49,7 @@
 
   boot.resumeDevice = "/dev/disk/by-uuid/00bd9f5e-8eb8-483e-a6b4-890de72c3506"; # unlocked dm-crypt partition
   boot.kernelParams = ["resume_offset=58687488"];
+  powerManagement.enable = true;
 
   system.autoUpgrade.enable = true;
 }
