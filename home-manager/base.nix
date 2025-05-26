@@ -14,6 +14,7 @@
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
     ./shell/zsh.nix
+    ./shell/ghostty.nix
     ./helix.nix
     ./plasma.nix
   ];
@@ -91,10 +92,6 @@
     unstable.inter
     unstable.nerd-fonts.fira-code
   ];
-
-  programs.ghostty = {
-    enable = true;
-  };
 
   programs.home-manager.enable = true;
   programs.git = {
