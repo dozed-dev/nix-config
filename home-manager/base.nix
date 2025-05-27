@@ -22,7 +22,6 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.modifications
-      outputs.overlays.nekoray
       outputs.overlays.rembg
       inputs.fjordlauncher.overlays.default
       outputs.overlays.stable-packages
@@ -53,7 +52,6 @@
     # GUI Tools
     yubikey-manager
     remmina
-    nekoray
     helvum
 
     # Desktop/media
