@@ -1,4 +1,10 @@
 { pkgs, ... }: {
+
+  services.v2raya = {
+    enable = true;
+    cliPackage = pkgs.xray;
+  };
+
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
   programs.git.enable = true;

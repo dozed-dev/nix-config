@@ -38,11 +38,6 @@
     ../virt.nix
   ];
 
-  services.v2raya = {
-    enable = true;
-    cliPackage = pkgs.xray;
-  };
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
