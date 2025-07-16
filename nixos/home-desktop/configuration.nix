@@ -15,8 +15,8 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.chaotic.nixosModules.default
     inputs.microvm.nixosModules.host
-    inputs.qiwi-minecraft-modpack.nixosModules.server
-    inputs.qiwi-minecraft-modpack.nixosModules.drasl
+    #inputs.qiwi-minecraft-modpack.nixosModules.server
+    #inputs.qiwi-minecraft-modpack.nixosModules.drasl
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
