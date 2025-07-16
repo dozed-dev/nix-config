@@ -43,10 +43,11 @@
     microvm.url = "github:astro/microvm.nix";
 
     # Minecraft server
-    qiwi-minecraft-modpack.url = "github:dozed-dev/qiwi-modpack";
+    #qiwi-minecraft-modpack.url = "github:dozed-dev/qiwi-modpack";
 
     # Fjord launcher
     fjordlauncher.url = "github:unmojang/FjordLauncher";
+    drasl.url = "github:unmojang/drasl";
 
     syberant-nur = {
       url = "github:syberant/nur-packages";
