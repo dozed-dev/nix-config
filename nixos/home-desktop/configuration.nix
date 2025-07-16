@@ -36,6 +36,7 @@
     ../podman.nix
     ../ld.nix
     ../virt.nix
+    ../drasl.nix
   ];
 
   # Bootloader.
