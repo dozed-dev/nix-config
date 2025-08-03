@@ -14,27 +14,17 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/1065799c-7074-42c3-8217-e7bede3fe7e3";
-      fsType = "btrfs";
-      options = [ "subvol=@" ];
+    { device = "/dev/disk/by-uuid/54d9887a-75e2-4477-9516-70001d3f6717";
+      fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."nix-cryptroot".device = "/dev/disk/by-uuid/e9c21dd2-e600-46e4-a89e-a320fb74b2b2";
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/1065799c-7074-42c3-8217-e7bede3fe7e3";
-      fsType = "btrfs";
-      options = [ "subvol=@nix" ];
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/1065799c-7074-42c3-8217-e7bede3fe7e3";
-      fsType = "btrfs";
-      options = [ "subvol=@home" ];
-    };
+  boot.initrd.luks.devices."nix-cryptroot" = {
+    device = "/dev/disk/by-uuid/2e0471c1-b309-4b74-872c-53aa50d3345d";
+    allowDiscards = true;
+  };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/841D-43BB";
+    { device = "/dev/disk/by-uuid/12CE-A600";
       fsType = "vfat";
       options = [ "fmask=0007" "dmask=0007" ];
     };
