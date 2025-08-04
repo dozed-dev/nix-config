@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, lib, ... }: {
 
   home.shellAliases = {
     e = "$EDITOR";
@@ -6,7 +6,7 @@
 
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
@@ -20,7 +20,7 @@
       theme = ""; # We are loading p10k as standalone plugin!
     };
 
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
       INSTANT_PROMPT="''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
       if [[ -r "$INSTANT_PROMPT" ]]; then source "$INSTANT_PROMPT"; fi
