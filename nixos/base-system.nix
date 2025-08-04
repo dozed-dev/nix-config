@@ -2,7 +2,7 @@
 
   services.v2raya = {
     enable = true;
-    cliPackage = pkgs.xray;
+    cliPackage = pkgs.stable.xray;
   };
 
   programs.zsh.enable = true;
