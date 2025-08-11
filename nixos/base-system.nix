@@ -17,6 +17,11 @@
     "kernel.sysrq" = 1;
   };
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
   # Other basic system utils
   environment.systemPackages = with pkgs; [
     wget
