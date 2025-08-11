@@ -7,10 +7,6 @@
   imports = [
     ../base.nix
   ];
-  # tmp for orca-slicer
-  nixpkgs.config.permittedInsecurePackages = [
-    "libsoup-2.74.3"
-  ];
   home.packages = with pkgs; [
     tcping-go
     rs-tftpd
