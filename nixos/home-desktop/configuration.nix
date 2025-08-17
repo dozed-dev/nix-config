@@ -33,7 +33,6 @@
     ../yubikey.nix
     ../base-system.nix
     ../android.nix
-    ../podman.nix
     ../ld.nix
     ../virt.nix
   ];
