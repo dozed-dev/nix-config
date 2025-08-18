@@ -28,15 +28,13 @@
     pciutils
     htop
     sshfs
-    netcat-gnu
     ripgrep
     fd
     file
     tree
     killall
-    virtiofsd
     cntr
-    appimage-run
+    lsof
   ];
 
   # SSH server. Very important if you're setting up a headless system.
