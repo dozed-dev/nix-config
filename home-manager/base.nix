@@ -80,6 +80,7 @@
     python3
     minicom
     usbutils
+    binwalk
 
     # LSP
     unstable.nixd
