@@ -81,6 +81,7 @@
     minicom
     usbutils
     binwalk
+    transcrypt
 
     # LSP
     unstable.nixd
