@@ -35,6 +35,7 @@
     ../android.nix
     ../ld.nix
     ../virt.nix
+    ../k3s-experiments/module.nix
   ];
 
   # Bootloader.
