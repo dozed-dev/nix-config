@@ -11,9 +11,6 @@
     inputs.agenix.nixosModules.default
     inputs.disko.nixosModules.disko
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./networking.nix
@@ -35,7 +32,7 @@
   swapDevices = [
     {
       device = "/var/lib/swapfile";
-      size = 8 * 1024;
+      size = 16 * 1024;
     }
   ];
 
@@ -46,9 +43,8 @@
     efiInstallAsRemovable = true;
   };
   boot.extraModprobeConfig = "options thinkpad_acpi force_load=1";
-
-  boot.resumeDevice = "/dev/disk/by-uuid/00bd9f5e-8eb8-483e-a6b4-890de72c3506"; # unlocked dm-crypt partition
-  boot.kernelParams = ["resume_offset=58687488"];
+  boot.resumeDevice = "/dev/disk/by-uuid/00bd9f5e-8eb8-483e-a6b4-890de72c3506";
+  boot.kernelParams = ["resume_offset=37386240"];
   powerManagement.enable = true;
 
   system.autoUpgrade.enable = true;
