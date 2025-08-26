@@ -98,6 +98,9 @@
     enable = true;
     userName = "dozed-dev";
     userEmail = "dev.dozed@aleeas.com";
+    extraConfig = {
+      pull.rebase = true;
+    };
   };
 
   xdg.configFile."yt-dlp/config".text = ''
