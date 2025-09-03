@@ -100,6 +100,7 @@
     userEmail = "dev.dozed@aleeas.com";
     extraConfig = {
       pull.rebase = true;
+      init.defaultBranch = "main";
     };
   };
 
