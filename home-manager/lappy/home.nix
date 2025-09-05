@@ -9,18 +9,8 @@
   ];
 
   home.packages = with pkgs; [
-    #f3d
-    #rembg
-
-    # Prod
-    libreoffice-qt6-fresh
-    #orca-slicer
-    unstable.freecad
-    orca-slicer
-
     # Gaming
     steam
-    lutris
     wine
     #fjordlauncher
 

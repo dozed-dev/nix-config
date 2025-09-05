@@ -22,7 +22,6 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.modifications
-      outputs.overlays.rembg
       inputs.fjordlauncher.overlays.default
       outputs.overlays.stable-packages
       outputs.overlays.unstable-packages
@@ -66,13 +65,11 @@
     qbittorrent
     unar
     ffmpeg-full
-    #f3d
-    #rembg
 
     # Prod
     krita
     libreoffice-qt6-fresh
-    #orca-slicer
+    orca-slicer
     unstable.freecad
 
     # Dev

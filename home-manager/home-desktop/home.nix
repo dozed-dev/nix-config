@@ -9,21 +9,13 @@
   ];
   home.packages = with pkgs; [
     tcping-go
-    rs-tftpd
-    godot_4
     blender
     orca-slicer
 
     # Gaming
     steam
-    lutris
     wine
     fjordlauncher
-
-    neovim
-    ansible
-    android-tools
-    scrcpy
   ];
   services.syncthing = {
     enable = true;
