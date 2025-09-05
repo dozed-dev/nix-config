@@ -23,7 +23,7 @@
     ../yubikey.nix
     ../base-system.nix
     ../virt.nix
-    ../k3s-experiments/module.nix
+    ../k3s.nix
   ];
 
   hardware.graphics.enable32Bit = true;

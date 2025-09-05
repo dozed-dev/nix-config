@@ -32,10 +32,9 @@
     ../ddcci.nix
     ../yubikey.nix
     ../base-system.nix
-    ../android.nix
     ../ld.nix
     ../virt.nix
-    ../k3s-experiments/module.nix
+    ../k3s.nix
   ];
 
   # Bootloader.
