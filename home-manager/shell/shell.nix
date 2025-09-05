@@ -1,0 +1,6 @@
+{ ... }: {
+
+  home.shellAliases = {
+    e = "$EDITOR";
+  };
+}

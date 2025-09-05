@@ -1,8 +1,8 @@
 { pkgs, config, lib, ... }: {
 
-  home.shellAliases = {
-    e = "$EDITOR";
-  };
+  imports = [
+    ./shell.nix
+  ];
 
   programs.zsh = {
     enable = true;
