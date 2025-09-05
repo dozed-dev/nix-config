@@ -31,17 +31,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.darwin.follows = ""; # disable macos for faster download
-    };
-
-    # microvm
-    microvm.url = "github:astro/microvm.nix";
-
     # Minecraft server
     #qiwi-minecraft-modpack.url = "github:dozed-dev/qiwi-modpack";
 
