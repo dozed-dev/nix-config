@@ -46,13 +46,4 @@
       };
     };
   };
-  
-  services.ollama = {
-    enable = true;
-    acceleration = "rocm";
-    environmentVariables = {
-      #HCC_AMDGPU_TARGET = "gfx1032"; # nix-shell -p "rocmPackages.rocminfo" --run "rocminfo" | grep "gfx"
-      HSA_OVERRIDE_GFX_VERSION="10.3.2";
-    };
-  };
 }
