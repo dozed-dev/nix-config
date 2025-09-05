@@ -4,6 +4,8 @@
     ./shell.nix
   ];
 
+  programs.direnv.enableZshIntegration = true;
+
   programs.zsh = {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
