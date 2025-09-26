@@ -31,6 +31,7 @@
     ../base-system.nix
     ../ld.nix
     ../virt.nix
+    ../zapret.nix
     ../k3s.nix
   ];
 
