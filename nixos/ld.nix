@@ -35,5 +35,6 @@
     xorg.pixman
     xorg.xorgproto
     zlib
+    python3
   ];
 }

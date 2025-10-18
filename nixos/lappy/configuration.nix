@@ -16,6 +16,7 @@
     ./disko-config.nix
     #./fprint.nix
 
+    ../ld.nix
     ../locale.nix
     ../nixpkgs.nix
     ../plasma-desktop.nix
