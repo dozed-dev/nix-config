@@ -79,6 +79,7 @@
     usbutils
     binwalk
     transcrypt
+    saleae-logic-2
 
     # LSP
     unstable.nixd

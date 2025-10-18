@@ -67,11 +67,7 @@
     enableUserSlices = true;
   };
 
-  # RTL-SDR
-  #services.udev.packages = [ pkgs.rtl-sdr pkgs.ledger-udev-rules ];
-  #boot.extraModprobeConfig = ''
-  #  blacklist dvb_usb_rtl28xxu
-  #'';
+  services.udev.packages = [ pkgs.saleae-logic-2 ];
   #users.groups.plugdev = {};
 
   services.flatpak.enable = true;
