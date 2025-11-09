@@ -6,6 +6,15 @@
 }:
 let
   pythonForIDA = pkgs.python313.withPackages (ps: with ps; [ rpyc ]);
+  ida-patcher-src = pkgs.fetchFromGitHub {
+    owner = "ThatNotEasy";
+    repo = "IDA-Patcher";
+    rev = "d11ddf892dc212f06e8d9a0072ca3e90cc4ce463";
+    sha256 = "sha256-Jzj/Qp6B+8DtxvgLtWum0BATbvJEOGGrvkernQDIfPM=";
+  };
+  ida-patcher-env = pkgs.python3.withPackages (ps: [
+    ps.colorama
+  ]);
 in
 pkgs.stdenv.mkDerivation rec {
   pname = "ida-pro";
@@ -30,6 +39,7 @@ pkgs.stdenv.mkDerivation rec {
     copyDesktopItems
     autoPatchelfHook
     libsForQt5.wrapQtAppsHook
+    ida-patcher-env
   ];
 
   # We just get a runfile in $src, so no need to unpack it.
@@ -84,8 +94,6 @@ pkgs.stdenv.mkDerivation rec {
       fi
     }
 
-    trap print_debug_info EXIT
-
     mkdir -p $out/bin $out/lib $out/opt/.local/share/applications
 
     # IDA depends on quite some things extracted by the runfile, so first extract everything
@@ -98,6 +106,7 @@ pkgs.stdenv.mkDerivation rec {
     # to copy it to fix permissions and patch the executable.
     $(cat $NIX_CC/nix-support/dynamic-linker) $src \
       --mode unattended --debuglevel 4 --prefix $IDADIR
+    print_debug_info
 
     # Link the exported libraries to the output.
     for lib in $IDADIR/libida*; do
@@ -120,6 +129,8 @@ pkgs.stdenv.mkDerivation rec {
         --prefix PATH : ${pythonForIDA}/bin
       ln -s $IDADIR/$bb $out/bin/$bb
     done
+
+    python3 ${ida-patcher-src}/main.py --end-date 2034 --path $out
 
     runHook postInstall
   '';
