@@ -4,9 +4,8 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
+    # from: https://github.com/msanft/ida-pro-overlay
+    ida-pro = import ./ida-pro.nix;
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

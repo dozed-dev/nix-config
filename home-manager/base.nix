@@ -21,8 +21,8 @@
 
   nixpkgs = {
     overlays = [
-      outputs.overlays.modifications
       inputs.fjordlauncher.overlays.default
+      outputs.overlays.modifications
       outputs.overlays.stable-packages
       outputs.overlays.unstable-packages
     ];
