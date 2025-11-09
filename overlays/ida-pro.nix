@@ -1,26 +1,17 @@
 {
   pkgs,
   lib,
-  runfile,
+  ida-portable,
   ...
 }:
 let
   pythonForIDA = pkgs.python313.withPackages (ps: with ps; [ rpyc ]);
-  ida-patcher-src = pkgs.fetchFromGitHub {
-    owner = "ThatNotEasy";
-    repo = "IDA-Patcher";
-    rev = "d11ddf892dc212f06e8d9a0072ca3e90cc4ce463";
-    sha256 = "sha256-Jzj/Qp6B+8DtxvgLtWum0BATbvJEOGGrvkernQDIfPM=";
-  };
-  ida-patcher-env = pkgs.python3.withPackages (ps: [
-    ps.colorama
-  ]);
 in
 pkgs.stdenv.mkDerivation rec {
   pname = "ida-pro";
   version = "9.1.0.250226";
 
-  src = runfile;
+  src = ida-portable;
 
   desktopItem = pkgs.makeDesktopItem {
     name = "ida-pro";
@@ -39,10 +30,9 @@ pkgs.stdenv.mkDerivation rec {
     copyDesktopItems
     autoPatchelfHook
     libsForQt5.wrapQtAppsHook
-    ida-patcher-env
   ];
 
-  # We just get a runfile in $src, so no need to unpack it.
+  # We just get ida-portable in $src, so no need to unpack it.
   dontUnpack = true;
 
   # Add everything to the RPATH, in case IDA decides to dlopen things.
@@ -96,17 +86,11 @@ pkgs.stdenv.mkDerivation rec {
 
     mkdir -p $out/bin $out/lib $out/opt/.local/share/applications
 
-    # IDA depends on quite some things extracted by the runfile, so first extract everything
+    # IDA depends on quite some things, so first extract everything
     # into $out/opt, then remove the unnecessary files and directories.
     IDADIR="$out/opt"
-    # IDA doesn't always honor `--prefix`, so we need to hack and set $HOME here.
-    HOME="$out/opt"
 
-    # Invoke the installer with the dynamic loader directly, avoiding the need
-    # to copy it to fix permissions and patch the executable.
-    $(cat $NIX_CC/nix-support/dynamic-linker) $src \
-      --mode unattended --debuglevel 4 --prefix $IDADIR
-    print_debug_info
+    cp -r -T "$src" "$IDADIR"
 
     # Link the exported libraries to the output.
     for lib in $IDADIR/libida*; do
@@ -129,8 +113,6 @@ pkgs.stdenv.mkDerivation rec {
         --prefix PATH : ${pythonForIDA}/bin
       ln -s $IDADIR/$bb $out/bin/$bb
     done
-
-    python3 ${ida-patcher-src}/main.py --end-date 2034 --path $out
 
     runHook postInstall
   '';
