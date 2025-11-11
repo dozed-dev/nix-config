@@ -93,9 +93,9 @@
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName = "dozed-dev";
-    userEmail = "dev.dozed@aleeas.com";
-    extraConfig = {
+    settings = {
+      user.name = "dozed-dev";
+      user.email = "dev.dozed@aleeas.com";
       pull.rebase = true;
       init.defaultBranch = "main";
     };
