@@ -30,6 +30,7 @@ pkgs.stdenv.mkDerivation rec {
     copyDesktopItems
     autoPatchelfHook
     libsForQt5.wrapQtAppsHook
+    #breakpointHook
   ];
 
   # We just get ida-portable in $src, so no need to unpack it.
@@ -90,7 +91,7 @@ pkgs.stdenv.mkDerivation rec {
     # into $out/opt, then remove the unnecessary files and directories.
     IDADIR="$out/opt"
 
-    cp -r -T "$src" "$IDADIR"
+    cp --no-preserve=mode -r -T "$src" "$IDADIR"
 
     # Link the exported libraries to the output.
     for lib in $IDADIR/libida*; do
@@ -107,6 +108,7 @@ pkgs.stdenv.mkDerivation rec {
     # Link the binaries to the output.
     # Also, hack the PATH so that pythonForIDA is used over the system python.
     for bb in ida assistant; do
+      chmod +x $IDADIR/$bb
       wrapProgram $IDADIR/$bb \
         --prefix QT_PLUGIN_PATH : $IDADIR/plugins/platforms \
         --prefix PYTHONPATH : $out/opt/idalib/python \
