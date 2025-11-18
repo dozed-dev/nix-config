@@ -79,7 +79,7 @@
     usbutils
     binwalk
     ghidra
-
+    gdb
 
     # LSP
     unstable.nixd
