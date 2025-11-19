@@ -49,6 +49,8 @@
     };
   };
 
+  services.tailscale.enable = true;
+
   users.users.quitzka = {
     isNormalUser = true;
     description = "quitzka";
