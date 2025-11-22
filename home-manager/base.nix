@@ -80,6 +80,7 @@
     binwalk
     ghidra
     gdb
+    teleport
 
     # LSP
     unstable.nixd
