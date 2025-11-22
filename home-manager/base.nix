@@ -5,7 +5,7 @@
   outputs,
   pkgs,
   ...
-}: {
+}: rec {
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -100,6 +100,23 @@
       user.email = "dev.dozed@aleeas.com";
       pull.rebase = true;
       init.defaultBranch = "main";
+    };
+  };
+
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks."*" = {};
+    # Common flags for all bksp hosts
+    matchBlocks."*.bksp t.bksp.in" = {
+      userKnownHostsFile = "${home.homeDirectory}/.tsh/known_hosts";
+      identityFile = "${home.homeDirectory}/.tsh/keys/t.bksp.in/forkingu";
+      certificateFile = "${home.homeDirectory}/.tsh/keys/t.bksp.in/forkingu-ssh/bksp-cert.pub";
+    };
+    # Flags for all bksp hosts except the proxy
+    matchBlocks."*.bksp !t.bksp.in" = {
+      port = 3022;
+      proxyCommand = "\"${pkgs.teleport}/bin/tsh\" proxy ssh --cluster=bksp --proxy=t.bksp.in:443 %r@%h:%p";
     };
   };
 
