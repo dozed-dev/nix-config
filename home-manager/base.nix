@@ -78,7 +78,7 @@
     minicom
     usbutils
     binwalk
-    ghidra
+    ghidra-qingke
     gdb
     teleport
 

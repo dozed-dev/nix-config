@@ -6,6 +6,14 @@
   modifications = final: prev: {
     # from: https://github.com/msanft/ida-pro-overlay
     ida-pro = import ./ida-pro.nix;
+    ghidra-qingke = prev.ghidra.overrideAttrs (oldAttrs: {
+      src = prev.fetchFromGitHub {
+        owner = "dozed-dev";
+        repo = "ghidra-qingke";
+        rev = "qingke";
+        sha256 = "sha256-GnI004jA0D638o4pLgoJ87RPJ8m+IHyKqkjpeUhWjLo=";
+      };
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
