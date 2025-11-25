@@ -34,6 +34,10 @@
     experimental-features = "nix-command flakes";
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
+    extra-substituters = [ "https://nabam-nixos-rockchip.cachix.org" ];
+    trusted-public-keys = [
+      "nabam-nixos-rockchip.cachix.org-1:BQDltcnV8GS/G86tdvjLwLFz1WeFqSk7O9yl+DR0AVM"
+    ];
   };
 
   # This value determines the NixOS release from which the default
