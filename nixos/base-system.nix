@@ -74,6 +74,9 @@
     enableUserSlices = true;
   };
 
+  # Emulation
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   services.udev.packages = [ pkgs.saleae-logic-2 ];
   #users.groups.plugdev = {};
 

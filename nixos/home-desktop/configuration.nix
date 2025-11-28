@@ -39,9 +39,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Emulation
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
   environment.systemPackages = with pkgs; [
     apparmor-utils
   ];
