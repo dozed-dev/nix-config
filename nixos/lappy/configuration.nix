@@ -23,7 +23,7 @@
     ../yubikey.nix
     ../base-system.nix
     ../virt.nix
-    ../k3s.nix
+    ../atk-wch-link-udev.nix
   ];
 
   hardware.graphics.enable32Bit = true;

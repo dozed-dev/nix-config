@@ -55,6 +55,7 @@
     openFirewall = true;
   };
 
+  users.groups.plugdev = {};
   users.users.quitzka = {
     isNormalUser = true;
     description = "quitzka";
@@ -78,7 +79,6 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.udev.packages = [ pkgs.saleae-logic-2 ];
-  #users.groups.plugdev = {};
 
   services.flatpak.enable = true;
   system.autoUpgrade.enable = true;
