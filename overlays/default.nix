@@ -14,6 +14,7 @@
         sha256 = "sha256-GnI004jA0D638o4pLgoJ87RPJ8m+IHyKqkjpeUhWjLo=";
       };
     });
+    LycheeSlicer-patched = prev.callPackage ./LycheeSlicer.nix { oldLycheeSlicer = prev.LycheeSlicer; };
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
