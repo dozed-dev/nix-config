@@ -17,6 +17,7 @@
     ./shell/ghostty.nix
     ./helix.nix
     ./plasma.nix
+    ./gdb-asm.nix
   ];
 
   nixpkgs = {
