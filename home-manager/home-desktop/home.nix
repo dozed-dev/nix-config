@@ -17,9 +17,9 @@
     wine
     fjordlauncher
 
-    (callPackage ida-pro {
-      ida-portable = /nix/store/dyh5m8lcsdvmfqkzk5sr1hna6m891864-ida-pro-9.1;
-    })
+    #(callPackage ida-pro {
+    #  ida-portable = /nix/store/dyh5m8lcsdvmfqkzk5sr1hna6m891864-ida-pro-9.1;
+    #})
   ];
   services.syncthing = {
     enable = true;

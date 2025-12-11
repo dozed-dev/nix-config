@@ -88,7 +88,7 @@
     unstable.nodePackages.bash-language-server
 
     # Fonts
-    unstable.ubuntu_font_family
+    unstable.ubuntu-classic
     unstable.inter
     unstable.nerd-fonts.fira-code
   ];
