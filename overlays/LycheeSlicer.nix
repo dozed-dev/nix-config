@@ -2,12 +2,12 @@
   appimageTools,
   buildGoModule,
   fetchgit,
+  fetchurl,
   makeDesktopItem,
   lib,
   xorg,
   wayland,
   wayland-protocols,
-  oldLycheeSlicer,
 }:
 let
   lychee-slicer-patched = buildGoModule {
@@ -38,9 +38,12 @@ let
     };
   };
 
-  pname = oldLycheeSlicer.pname + "-patched";
-  version = oldLycheeSlicer.version;
-  src = oldLycheeSlicer.src;
+  pname = "LycheeSlicer-patched";
+  version = "7.4.5";
+  src = fetchurl {
+    url = "https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-${version}.AppImage";
+    hash = "sha256-UY8bS3nPhUqyBeMD7Ou6OJZ2LKFi3QbNGeTSmtC1Sbg=";
+  };
 
   appimageContents = appimageTools.extract {
     inherit pname version src;
