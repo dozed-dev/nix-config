@@ -14,7 +14,7 @@
         sha256 = "sha256-GnI004jA0D638o4pLgoJ87RPJ8m+IHyKqkjpeUhWjLo=";
       };
     });
-    LycheeSlicer-patched = prev.callPackage ./LycheeSlicer.nix {};
+    LycheeSlicer-patched = prev.callPackage ./LycheeSlicer.nix { oldLycheeSlicer = prev.LycheeSlicer; };
     orca-slicer = prev.orca-slicer.overrideAttrs (oldAttrs: {
       patches = oldAttrs.patches ++ [(prev.writeText "bridging-density-backport.patch" ''
         diff --git a/src/libslic3r/PrintConfig.cpp b/src/libslic3r/PrintConfig.cpp
