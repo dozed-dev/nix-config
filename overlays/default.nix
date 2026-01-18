@@ -15,7 +15,7 @@
       };
     });
     LycheeSlicer-patched = prev.callPackage ./LycheeSlicer.nix { oldLycheeSlicer = prev.LycheeSlicer; };
-    orca-slicer = prev.orca-slicer.overrideAttrs (oldAttrs: {
+    orca-slicer-patched = prev.orca-slicer.overrideAttrs (oldAttrs: {
       patches = oldAttrs.patches ++ [(prev.writeText "bridging-density-backport.patch" ''
         diff --git a/src/libslic3r/PrintConfig.cpp b/src/libslic3r/PrintConfig.cpp
         index 498678a..9063d21 100644
