@@ -10,7 +10,6 @@
   home.packages = with pkgs; [
     tcping-go
     blender
-    orca-slicer
 
     # Gaming
     steam
