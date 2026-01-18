@@ -15,6 +15,31 @@
       };
     });
     LycheeSlicer-patched = prev.callPackage ./LycheeSlicer.nix { oldLycheeSlicer = prev.LycheeSlicer; };
+    orca-slicer = prev.orca-slicer.overrideAttrs (oldAttrs: {
+      patches = oldAttrs.patches ++ [(prev.writeText "bridging-density-backport.patch" ''
+        diff --git a/src/libslic3r/PrintConfig.cpp b/src/libslic3r/PrintConfig.cpp
+        index 498678a..9063d21 100644
+        --- a/src/libslic3r/PrintConfig.cpp
+        +++ b/src/libslic3r/PrintConfig.cpp
+        @@ -1022,7 +1022,7 @@ void PrintConfigDef::init_fff_params()
+                              "around the extruded bridge, improving its cooling speed.");
+             def->sidetext = "%";
+             def->min = 10;
+        -    def->max = 100;
+        +    def->max = 150;
+             def->mode = comAdvanced;
+             def->set_default_value(new ConfigOptionPercent(100));
+ 
+        @@ -1036,7 +1036,7 @@ void PrintConfigDef::init_fff_params()
+                              "further improving internal bridging structure before solid infill is extruded.");
+             def->sidetext = "%";
+             def->min = 10;
+        -    def->max = 100;
+        +    def->max = 150;
+             def->mode = comAdvanced;
+             def->set_default_value(new ConfigOptionPercent(100));
+      '')];
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
