@@ -71,7 +71,7 @@
     libreoffice-qt6-fresh
     orca-slicer
     LycheeSlicer-patched
-    unstable.freecad
+    #unstable.freecad
 
     # Dev
     lazygit
