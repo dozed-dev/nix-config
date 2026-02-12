@@ -15,7 +15,27 @@
       };
     });
     LycheeSlicer-patched = prev.callPackage ./LycheeSlicer.nix { oldLycheeSlicer = prev.LycheeSlicer; };
-    orca-slicer-patched = prev.callPackage ./orca-slicer.nix { };
+    orca-slicer-patched = prev.orca-slicer.overrideAttrs (oldAttrs: {
+      src = prev.fetchFromGitHub {
+        owner = "mnott";
+        repo = "OrcaSlicer";
+        rev = "6a398a03472dc4206bc1fddfbb6ce79db8e7de40";
+        sha256 = "sha256-xNedalhtLD65/EbwnxokvC70vs6lfJZVcK+t0uJnDKw=";
+      };
+      cmakeFlags =
+        let
+          filtered =
+            builtins.filter
+              (flag:
+                !(prev.lib.hasInfix "LIBNOISE_LIBRARY" flag))
+              oldAttrs.cmakeFlags;
+        in
+          filtered ++ [
+            (prev.lib.cmakeFeature
+              "LIBNOISE_LIBRARY_RELEASE"
+              "${prev.libnoise}/lib/libnoise-static.a")
+          ];
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
