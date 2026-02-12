@@ -61,10 +61,10 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2.3.1";
 
   src = fetchFromGitHub {
-    owner = "SoftFever";
+    owner = "OrcaSlicer";
     repo = "OrcaSlicer";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-RdMBx/onLq58oI1sL0cHmF2SGDfeI9KkPPCbjyMqECI=";
+    rev = "026499c5b77ab86375ec11776cef532c72d32792";
+    hash = "sha256-WHNP4GEyK/8tPRVVtLN4eS0SBKfjPUaj0Tl7VwzbrPA=";
   };
 
   nativeBuildInputs = [
