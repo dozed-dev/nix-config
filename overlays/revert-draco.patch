@@ -1,0 +1,721 @@
+--- b/cmake/modules/FindDraco.cmake
++++ /dev/null
+@@ -1,26 +0,0 @@
+-set(_q "")
+-if(${CMAKE_FIND_PACKAGE_NAME}_FIND_QUIETLY)
+-    set(_q QUIET)
+-    set(_quietly TRUE)
+-endif()
+-find_package(${CMAKE_FIND_PACKAGE_NAME} ${${CMAKE_FIND_PACKAGE_NAME}_FIND_VERSION} CONFIG ${_q})
+-
+-if (NOT ${CMAKE_FIND_PACKAGE_NAME}_FOUND)
+-    include(CheckIncludeFileCXX)
+-    add_library(draco INTERFACE)
+-    target_include_directories(draco INTERFACE include)
+-
+-    if (_quietly)
+-        set(CMAKE_REQUIRED_QUIET ON)
+-    endif()
+-    CHECK_INCLUDE_FILE_CXX("draco/draco_features.h" HAVE_DRACO_H)
+-
+-    if (NOT HAVE_DRACO_H)
+-        if (${CMAKE_FIND_PACKAGE_NAME}_FIND_REQUIRED)
+-            message(FATAL_ERROR "Draco library not found. Please install the dependency.")
+-        elseif(NOT _quietly)
+-            message(WARNING "Draco library not found.")
+-        endif()
+-    endif ()
+-endif()
+-
+--- b/deps/CMakeLists.txt
++++ a/deps/CMakeLists.txt
+@@ -336,8 +336,6 @@
+ include(NLopt/NLopt.cmake)
+ include(libnoise/libnoise.cmake)
+ 
+-include(Draco/Draco.cmake)
+-
+ 
+ # I *think* 1.1 is used for *just* md5 hashing?
+ # 3.1 has everything in the right place, but the md5 funcs used are deprecated
+@@ -401,7 +399,6 @@
+     ${CURL_PKG}
+     ${WXWIDGETS_PKG}
+     dep_Cereal
+-    dep_Draco
+     dep_NLopt
+     dep_OpenVDB
+     dep_OpenCSG
+--- b/deps/Draco/Draco.cmake
++++ /dev/null
+@@ -1,4 +0,0 @@
+-orcaslicer_add_cmake_project(Draco
+-    URL https://github.com/google/draco/archive/refs/tags/1.5.7.zip
+-    URL_HASH SHA256=27b72ba2d5ff3d0a9814ad40d4cb88f8dc89a35491c0866d952473f8f9416b77
+-)
+\ No newline at end of file
+--- b/src/libslic3r/AppConfig.cpp
++++ a/src/libslic3r/AppConfig.cpp
+@@ -1,6 +1,5 @@
+ #include "libslic3r/libslic3r.h"
+ #include "libslic3r/Utils.hpp"
+-#include "libslic3r/Format/DRC.hpp"
+ #include "AppConfig.hpp"
+ //BBS
+ #include "Preset.hpp"
+@@ -125,8 +124,6 @@
+ #ifdef _WIN32
+         if (get("associate_3mf").empty())
+             set_bool("associate_3mf", false);
+-        if (get("associate_drc").empty())
+-            set_bool("associate_drc", false);
+         if (get("associate_stl").empty())
+             set_bool("associate_stl", false);
+         if (get("associate_step").empty())
+@@ -237,9 +234,6 @@
+     if (get("enable_multi_machine").empty())
+         set_bool("enable_multi_machine", false);
+ 
+-    if (get("drc_bits").empty())
+-        set("drc_bits", DRC_BITS_DEFAULT_STR);
+-
+     if (get("show_gcode_window").empty())
+         set_bool("show_gcode_window", true);
+ 
+--- b/src/libslic3r/CMakeLists.txt
++++ a/src/libslic3r/CMakeLists.txt
+@@ -183,8 +183,6 @@
+     Format/3mf.hpp
+     Format/AMF.cpp
+     Format/AMF.hpp
+-    Format/DRC.cpp
+-    Format/DRC.hpp
+     Format/bbs_3mf.cpp
+     Format/bbs_3mf.hpp
+     format.hpp
+@@ -540,7 +538,6 @@
+ target_include_directories(libslic3r SYSTEM PUBLIC ${OpenCASCADE_INCLUDE_DIR})
+ 
+ find_package(JPEG REQUIRED)
+-find_package(draco REQUIRED)
+ 
+ set(OCCT_LIBS
+     TKXDESTEP
+@@ -586,7 +583,6 @@
+         cereal::cereal
+         clipper
+         Clipper2
+-        draco::draco
+         eigen
+         glu-libtess
+         JPEG::JPEG
+--- b/src/libslic3r/Format/DRC.cpp
++++ /dev/null
+@@ -1,166 +0,0 @@
+-#include <string>
+-#include <utility>
+-#include <cstring>
+-
+-#include <boost/iostreams/device/mapped_file.hpp>
+-#include <boost/nowide/cstdio.hpp>
+-
+-#include <draco/compression/encode.h>
+-#include <draco/compression/decode.h>
+-#include <draco/io/mesh_io.h>
+-#include <draco/mesh/mesh.h>
+-using namespace draco;
+-
+-#include "libslic3r/Model.hpp"
+-#include "libslic3r/TriangleMesh.hpp"
+-#include "DRC.hpp"
+-
+-#ifdef _WIN32
+-#define DIR_SEPARATOR '\\'
+-#else
+-#define DIR_SEPARATOR '/'
+-#endif
+-
+-namespace Slic3r {
+-
+-bool load_drc(const char *path, TriangleMesh *meshptr)
+-{
+-    try {
+-        boost::iostreams::mapped_file_source file(path);
+-
+-        DecoderBuffer buffer;
+-        buffer.Init(file.data(), file.size());
+-
+-        auto geotype = Decoder::GetEncodedGeometryType(&buffer);
+-        if ((!geotype.ok()) || geotype.value() != TRIANGULAR_MESH) {
+-            return false;
+-        }
+-
+-        Decoder decoder;
+-        Mesh dracoMesh;
+-        Status status = decoder.DecodeBufferToGeometry(&buffer, &dracoMesh);
+-        if (!status.ok()) {
+-            return false;
+-        }
+-        file.close();
+-
+-
+-        indexed_triangle_set its;
+-
+-        const PointAttribute *const positions = dracoMesh.GetNamedAttribute(GeometryAttribute::POSITION);
+-        size_t num_vertices = positions->size();
+-        its.vertices.reserve(num_vertices);
+-        for (AttributeValueIndex i(0); i < num_vertices; ++ i) {
+-            float pos[3];
+-            positions->ConvertValue<float>(i, 3, pos);
+-            its.vertices.emplace_back(pos[0], pos[1], pos[2]);
+-        }
+-
+-        size_t num_faces = dracoMesh.num_faces();
+-        its.indices.reserve(num_faces);
+-        for (FaceIndex i(0); i < num_faces; ++ i) {
+-            Mesh::Face face = dracoMesh.face(i);
+-
+-            its.indices.emplace_back(
+-                positions->mapped_index(face[0]).value(),
+-                positions->mapped_index(face[1]).value(),
+-                positions->mapped_index(face[2]).value()
+-            );
+-        }
+-
+-        *meshptr = TriangleMesh(std::move(its));
+-        if (meshptr->volume() < 0)
+-            meshptr->flip_triangles();
+-    } catch (const std::exception& e) {
+-        BOOST_LOG_TRIVIAL(error) << "load_drc: " << e.what();
+-        return false;
+-    }
+-    return true;
+-}
+-
+-bool load_drc(const char *path, Model *model, const char *object_name_in)
+-{
+-    TriangleMesh mesh;
+-
+-    bool ret = load_drc(path, &mesh);
+-
+-    if (ret) {
+-        std::string  object_name;
+-        if (object_name_in == nullptr) {
+-            const char *last_slash = strrchr(path, DIR_SEPARATOR);
+-            object_name.assign((last_slash == nullptr) ? path : last_slash + 1);
+-        } else
+-           object_name.assign(object_name_in);
+-
+-        model->add_object(object_name.c_str(), path, std::move(mesh));
+-    }
+-
+-    return ret;
+-}
+-
+-bool store_drc(const char *path, TriangleMesh *mesh, int bits, int speed)
+-{
+-    try {
+-        const std::vector<stl_triangle_vertex_indices>* indices = &(mesh->its.indices);
+-        const std::vector<stl_vertex>* vertices = &(mesh->its.vertices);
+-        
+-        Mesh dracoMesh;
+-
+-        dracoMesh.set_num_points(vertices->size());
+-        
+-        GeometryAttribute gaPos;
+-        gaPos.Init(GeometryAttribute::POSITION, nullptr, 3, DT_FLOAT32, false, sizeof(float)*3, 0);
+-        int32_t idPos = dracoMesh.AddAttribute(gaPos, true, indices->size() * 3);
+-        
+-        dracoMesh.attribute(idPos)->Resize(vertices->size());
+-        
+-        for (size_t i = 0; i < vertices->size(); ++ i) {
+-            float vertex[3];
+-            vertex[0] = vertices->at(i)(0);
+-            vertex[1] = vertices->at(i)(1);
+-            vertex[2] = vertices->at(i)(2);
+-            dracoMesh.attribute(idPos)->SetAttributeValue(AttributeValueIndex(i), vertex);
+-        }
+-        
+-        dracoMesh.SetNumFaces(indices->size());
+-        for (size_t i = 0; i < indices->size(); ++ i) {
+-            Mesh::Face face;
+-            face[0] = PointIndex(indices->at(i)[0]);
+-            face[1] = PointIndex(indices->at(i)[1]);
+-            face[2] = PointIndex(indices->at(i)[2]);
+-            dracoMesh.SetFace(FaceIndex(i), face);
+-        }
+-        
+-        Encoder encoder;
+-        encoder.SetSpeedOptions(speed, speed);
+-        encoder.SetAttributeQuantization(GeometryAttribute::POSITION, bits);
+-        
+-        EncoderBuffer buffer;
+-        encoder.EncodeMeshToBuffer(dracoMesh, &buffer);
+-        
+-        FILE* fp = boost::nowide::fopen(path, "wb");
+-        if (!fp) return false;
+-        size_t written = fwrite(buffer.data(), 1, buffer.size(), fp);
+-        fclose(fp);
+-        
+-        if (written != buffer.size()) return false;
+-    } catch (const std::exception& e) {
+-        BOOST_LOG_TRIVIAL(error) << "store_drc: " << e.what();
+-        return false;
+-    }
+-    return true;
+-}
+-
+-bool store_drc(const char *path, ModelObject *model_object, int bits, int speed)
+-{
+-    TriangleMesh mesh = model_object->mesh();
+-    return store_drc(path, &mesh, bits, speed);
+-}
+-
+-bool store_drc(const char *path, Model *model, int bits, int speed)
+-{
+-    TriangleMesh mesh = model->mesh();
+-    return store_drc(path, &mesh, bits, speed);
+-}
+-
+-}; // namespace Slic3r
+--- b/src/libslic3r/Format/DRC.hpp
++++ /dev/null
+@@ -1,26 +0,0 @@
+-#ifndef slic3r_Format_DRC_hpp_
+-#define slic3r_Format_DRC_hpp_
+-
+-namespace Slic3r {
+-
+-#define DRC_BITS_MIN 8
+-#define DRC_BITS_MAX 30
+-#define DRC_BITS_DEFAULT 0
+-#define DRC_BITS_DEFAULT_STR "0"
+-#define DRC_SPEED_DEFAULT 0
+-
+-class TriangleMesh;
+-class ModelObject;
+-class Model;
+-
+-// Load a Draco file into a provided model.
+-extern bool load_drc(const char *path, TriangleMesh *meshptr);
+-extern bool load_drc(const char *path, Model *model, const char *object_name = nullptr);
+-
+-extern bool store_drc(const char* path, TriangleMesh* mesh, int bits, int speed = DRC_SPEED_DEFAULT);
+-extern bool store_drc(const char* path, ModelObject* model_object, int bits, int speed = DRC_SPEED_DEFAULT);
+-extern bool store_drc(const char* path, Model* model, int bits, int speed = DRC_SPEED_DEFAULT);
+-
+-}; // namespace Slic3r
+-
+-#endif /* slic3r_Format_DRC_hpp_ */
+--- b/src/libslic3r/Model.cpp
++++ a/src/libslic3r/Model.cpp
+@@ -14,7 +14,6 @@
+ 
+ #include "Format/AMF.hpp"
+ #include "Format/svg.hpp"
+-#include "Format/DRC.hpp"
+ // BBS
+ #include "FaceDetector.hpp"
+ 
+@@ -312,8 +311,6 @@
+         result = load_svg(input_file.c_str(), &model, message);
+     //BBS: remove the old .amf.xml files
+     //else if (boost::algorithm::iends_with(input_file, ".amf") || boost::algorithm::iends_with(input_file, ".amf.xml"))
+-    else if (boost::algorithm::iends_with(input_file, ".drc"))
+-        result = load_drc(input_file.c_str(), &model);
+     else if (boost::algorithm::iends_with(input_file, ".amf"))
+         //BBS: is_xxx is used for is_inches when load amf
+         result = load_amf(input_file.c_str(), config, config_substitutions, &model, is_xxx);
+--- b/src/slic3r/GUI/AboutDialog.cpp
++++ a/src/slic3r/GUI/AboutDialog.cpp
+@@ -90,7 +90,6 @@
+         { "CGAL",                                           "",      "https://www.cgal.org" },
+         { "Clipper",                                        "",      "http://www.angusj.co" },
+         { "libcurl",                                        "",      "https://curl.se/libcurl" },
+-        { "Draco",                                          "",      "https://google.github.io/draco/" },
+         { "Eigen3",                                         "",      "http://eigen.tuxfamily.org" },
+         { "Expat",                                          "",      "http://www.libexpat.org" },
+         { "fast_float",                                     "",      "https://github.com/fastfloat/fast_float" },
+--- b/src/slic3r/GUI/GUI_App.cpp
++++ a/src/slic3r/GUI/GUI_App.cpp
+@@ -537,10 +537,10 @@
+     /* FT_GCODE */   { "G-code files"sv,    { ".gcode"sv} },
+ #ifdef __APPLE__
+     /* FT_MODEL */
++    {"Supported files"sv, {".3mf"sv, ".stl"sv, ".oltp"sv, ".stp"sv, ".step"sv, ".svg"sv, ".amf"sv, ".obj"sv, ".usd"sv, ".usda"sv, ".usdc"sv, ".usdz"sv, ".abc"sv, ".ply"sv}},
+-    {"Supported files"sv, {".3mf"sv, ".stl"sv, ".oltp"sv, ".stp"sv, ".step"sv, ".svg"sv, ".amf"sv, ".obj"sv, ".usd"sv, ".usda"sv, ".usdc"sv, ".usdz"sv, ".abc"sv, ".ply"sv, ".drc"sv}},
+ #else
+     /* FT_MODEL */
++    {"Supported files"sv, {".3mf"sv, ".stl"sv, ".oltp"sv, ".stp"sv, ".step"sv, ".svg"sv, ".amf"sv, ".obj"sv}},
+-    {"Supported files"sv, {".3mf"sv, ".stl"sv, ".oltp"sv, ".stp"sv, ".step"sv, ".svg"sv, ".amf"sv, ".obj"sv, ".drc"sv}},
+ #endif
+     /* FT_ZIP */     { "ZIP files"sv,       { ".zip"sv } },
+     /* FT_PROJECT */ { "Project files"sv,   { ".3mf"sv} },
+@@ -550,7 +550,6 @@
+     /* FT_SVG */     { "SVG files"sv,       { ".svg"sv } },
+     /* FT_TEX */     { "Texture"sv,         { ".png"sv, ".svg"sv } },
+     /* FT_SL1 */     { "Masked SLA files"sv, { ".sl1"sv, ".sl1s"sv } },
+-    /* FT_DRC */     { "Draco files"sv,     { ".drc"sv } },
+ };
+ 
+ // This function produces a Win32 file dialog file template mask to be consumed by wxWidgets on all platforms.
+--- b/src/slic3r/GUI/GUI_App.hpp
++++ a/src/slic3r/GUI/GUI_App.hpp
+@@ -106,8 +106,6 @@
+ 
+     FT_SL1,
+ 
+-    FT_DRC,
+-
+     FT_SIZE,
+ };
+ 
+--- b/src/slic3r/GUI/GUI_Factories.cpp
++++ a/src/slic3r/GUI/GUI_Factories.cpp
+@@ -863,27 +863,6 @@
+         }, m_parent);
+ }
+ 
+-void MenuFactory::append_menu_item_export_drc(wxMenu* menu, bool is_mulity_menu)
+-{
+-    append_menu_item(menu, wxID_ANY, _L("Export as one DRC") + dots, "",
+-        [](wxCommandEvent&) { plater()->export_stl(false, true, false, FT_DRC); }, "", nullptr,
+-        [is_mulity_menu]() {
+-            const Selection& selection = plater()->canvas3D()->get_selection();
+-            if (is_mulity_menu)
+-                return selection.is_multiple_full_instance() || selection.is_multiple_full_object();
+-            else
+-                return selection.is_single_full_instance() || selection.is_single_full_object();
+-        }, m_parent);
+-    if (!is_mulity_menu)
+-        return;
+-    append_menu_item(menu, wxID_ANY, _L("Export as DRCs") + dots, "",
+-        [](wxCommandEvent&) { plater()->export_stl(false, true, true, FT_DRC); }, "", nullptr,
+-        []() {
+-            const Selection& selection = plater()->canvas3D()->get_selection();
+-            return selection.is_multiple_full_instance() || selection.is_multiple_full_object();
+-        }, m_parent);
+-}
+-
+ void MenuFactory::append_menu_item_reload_from_disk(wxMenu* menu)
+ {
+     append_menu_item(menu, wxID_ANY, _L("Reload from disk"), _L("Reload the selected parts from disk"),
+@@ -1303,7 +1282,6 @@
+ 
+     append_menu_item_reload_from_disk(menu);
+     append_menu_item_export_stl(menu);
+-    append_menu_item_export_drc(menu);
+     // "Scale to print volume" makes a sense just for whole object
+     append_menu_item_scale_selection_to_fit_print_volume(menu);
+ 
+@@ -1389,7 +1367,6 @@
+     append_menu_item_replace_with_stl(&m_object_menu);
+     append_menu_item_replace_all_with_stl(&m_object_menu);
+     append_menu_item_export_stl(&m_object_menu);
+-    append_menu_item_export_drc(&m_object_menu);
+ }
+ 
+ void MenuFactory::create_bbl_assemble_object_menu()
+@@ -1424,7 +1401,6 @@
+     append_menu_item_delete(menu);
+     append_menu_item_reload_from_disk(menu);
+     append_menu_item_export_stl(menu);
+-    append_menu_item_export_drc(menu);
+     append_menu_item_fix_through_netfabb(menu);
+     append_menu_items_mirror(menu);
+     append_menu_item_merge_parts_to_single_part(menu);
+@@ -1806,7 +1782,6 @@
+         append_menu_item_change_filament(menu);
+         menu->AppendSeparator();
+         append_menu_item_export_stl(menu, true);
+-        append_menu_item_export_drc(menu, true);
+     }
+     else {
+         append_menu_item_center(menu);
+--- b/src/slic3r/GUI/GUI_Factories.hpp
++++ a/src/slic3r/GUI/GUI_Factories.hpp
+@@ -141,7 +141,6 @@
+     wxMenuItem* append_menu_item_fix_through_netfabb(wxMenu* menu);
+     //wxMenuItem* append_menu_item_simplify(wxMenu* menu);
+     void        append_menu_item_export_stl(wxMenu* menu, bool is_mulity_menu = false);
+-    void        append_menu_item_export_drc(wxMenu* menu, bool is_mulity_menu = false);
+     void        append_menu_item_reload_from_disk(wxMenu* menu);
+     void        append_menu_item_replace_with_stl(wxMenu* menu);
+     void        append_menu_item_replace_all_with_stl(wxMenu* menu);
+--- b/src/slic3r/GUI/MainFrame.cpp
++++ a/src/slic3r/GUI/MainFrame.cpp
+@@ -2516,12 +2516,6 @@
+         append_menu_item(export_menu, wxID_ANY, _L("Export all objects as STLs") + dots, _L("Export all objects as STLs"),
+             [this](wxCommandEvent&) { if (m_plater) m_plater->export_stl(false, false, true); }, "menu_export_stl", nullptr,
+             [this](){return can_export_model(); }, this);
+-        append_menu_item(export_menu, wxID_ANY, _L("Export all objects as one DRC") + dots, _L("Export all objects as one DRC"),
+-            [this](wxCommandEvent&) { if (m_plater) m_plater->export_stl(false, false, false, FT_DRC); }, "menu_export_stl", nullptr,
+-            [this](){return can_export_model(); }, this);
+-        append_menu_item(export_menu, wxID_ANY, _L("Export all objects as DRCs") + dots, _L("Export all objects as DRCs"),
+-            [this](wxCommandEvent&) { if (m_plater) m_plater->export_stl(false, false, true, FT_DRC); }, "menu_export_stl", nullptr,
+-            [this](){return can_export_model(); }, this);
+         append_menu_item(export_menu, wxID_ANY, _L("Export Generic 3MF") + dots/* + "\t" + ctrl + "G"*/, _L("Export 3MF file without using some 3mf-extensions"),
+             [this](wxCommandEvent&) { if (m_plater) m_plater->export_core_3mf(); }, "menu_export_sliced_file", nullptr,
+             [this](){return can_export_model(); }, this);
+--- b/src/slic3r/GUI/Plater.cpp
++++ a/src/slic3r/GUI/Plater.cpp
+@@ -49,7 +49,6 @@
+ 
+ #include "libslic3r/libslic3r.h"
+ #include "libslic3r/Format/STL.hpp"
+-#include "libslic3r/Format/DRC.hpp"
+ #include "libslic3r/Format/STEP.hpp"
+ #include "libslic3r/Format/AMF.hpp"
+ //#include "libslic3r/Format/3mf.hpp"
+@@ -6968,7 +6967,6 @@
+     wxString wildcard;
+     switch (file_type) {
+         case FT_STL:
+-        case FT_DRC:
+         case FT_AMF:
+         case FT_3MF:
+         case FT_GCODE:
+@@ -6990,12 +6988,6 @@
+             dlg_title = _L("Export STL file:");
+             break;
+         }
+-        case FT_DRC:
+-        {
+-            output_file.replace_extension("drc");
+-            dlg_title = _L("Export Draco file:");
+-            break;
+-        }
+         case FT_AMF:
+         {
+             // XXX: Problem on OS X with double extension?
+@@ -13693,7 +13685,7 @@
+ //BBS: remove GCodeViewer as seperate APP logic
+ bool Plater::load_files(const wxArrayString& filenames)
+ {
++    const std::regex pattern_drop(".*[.](stp|step|stl|oltp|obj|amf|3mf|svg|zip)", std::regex::icase);
+-    const std::regex pattern_drop(".*[.](stp|step|stl|oltp|obj|amf|3mf|svg|zip|drc)", std::regex::icase);
+     const std::regex pattern_gcode_drop(".*[.](gcode|g)", std::regex::icase);
+ 
+     std::vector<fs::path> normal_paths;
+@@ -14730,22 +14722,10 @@
+ 
+ // BBS export with/without boolean, however, stil merge mesh
+ #define EXPORT_WITH_BOOLEAN 0
++void Plater::export_stl(bool extended, bool selection_only, bool multi_stls)
+-void Plater::export_stl(bool extended, bool selection_only, bool multi_stls, FileType file_type)
+ {
+     if (p->model.objects.empty()) { return; }
+ 
+-    int quality = 0;
+-
+-    switch (file_type) {
+-    case FT_DRC:
+-        AppConfig* app_config = wxGetApp().app_config;
+-        if (app_config)
+-            quality = stoi(app_config->get("drc_bits"));
+-        else
+-            quality = DRC_BITS_DEFAULT;
+-        break;
+-    }
+-
+     wxString path;
+     if (multi_stls) {
+         wxDirDialog dlg(this, _L("Choose a directory"), from_u8(wxGetApp().app_config->get_last_dir()),
+@@ -14754,7 +14734,7 @@
+             path = dlg.GetPath() + "/";
+         }
+     } else {
++        path = p->get_export_file(FT_STL);
+-        path = p->get_export_file(file_type);
+     }
+     if (path.empty()) { return; }
+     const std::string path_u8 = into_u8(path);
+@@ -14901,17 +14881,11 @@
+     else
+         mesh_to_export = mesh_to_export_sla;
+ 
++    auto get_save_file = [](std::string const & dir, std::string const & name) {
++        auto path = dir + name + ".stl";
+-    auto get_save_file = [file_type](std::string const & dir, std::string const & name) {
+-        std::string ext = "";
+-        switch (file_type) {
+-        case FT_STL: ext = ".stl"; break;
+-        case FT_DRC: ext = ".drc"; break;
+-        }
+-
+-        auto path = dir + name + ext;
+         int n = 1;
+         while (boost::filesystem::exists(path))
++            path = dir + name + "(" + std::to_string(n++) + ").stl";
+-            path = dir + name + "(" + std::to_string(n++) + ")"+ext;
+         return path;
+     };
+ 
+@@ -14944,10 +14918,7 @@
+                 auto mesh = mesh_to_export(*object, i.second);
+                 mesh.translate(-object->origin_translation.cast<float>());
+ 
++                Slic3r::store_stl(get_save_file(path_u8, object->name).c_str(), &mesh, true);
+-                switch (file_type) {
+-                case FT_STL: Slic3r::store_stl(get_save_file(path_u8, object->name).c_str(), &mesh, true); break;
+-                case FT_DRC: Slic3r::store_drc(get_save_file(path_u8, object->name).c_str(), &mesh, quality); break;
+-                }
+             }
+             return;
+         }
+@@ -14960,19 +14931,12 @@
+         for (const ModelObject* o : p->model.objects) {
+             auto mesh = mesh_to_export(*o, -1);
+             mesh.translate(-o->origin_translation.cast<float>());
++            Slic3r::store_stl(get_save_file(path_u8, o->name).c_str(), &mesh, true);
+-
+-            switch (file_type) {
+-            case FT_STL: Slic3r::store_stl(get_save_file(path_u8, o->name).c_str(), &mesh, true); break;
+-            case FT_DRC: Slic3r::store_drc(get_save_file(path_u8, o->name).c_str(), &mesh, quality); break;
+-            }
+         }
+         return;
+     }
+ 
++    Slic3r::store_stl(path_u8.c_str(), &mesh, true);
+-    switch (file_type) {
+-    case FT_STL: Slic3r::store_stl(path_u8.c_str(), &mesh, true); break;
+-    case FT_DRC: Slic3r::store_drc(path_u8.c_str(), &mesh, quality); break;
+-    }
+ }
+ 
+ //BBS: remove amf export
+--- b/src/slic3r/GUI/Plater.hpp
++++ a/src/slic3r/GUI/Plater.hpp
+@@ -485,7 +485,7 @@
+     void send_gcode_finish(wxString name);
+     void export_core_3mf();
+     static TriangleMesh combine_mesh_fff(const ModelObject& mo, int instance_id, std::function<void(const std::string&)> notify_func = {});
++    void export_stl(bool extended = false, bool selection_only = false, bool multi_stls = false);
+-    void export_stl(bool extended = false, bool selection_only = false, bool multi_stls = false, FileType file_type = FT_STL);
+     //BBS: remove amf
+     //void export_amf();
+     //BBS add extra param for exporting 3mf silence
+--- b/src/slic3r/GUI/Preferences.cpp
++++ a/src/slic3r/GUI/Preferences.cpp
+@@ -6,7 +6,6 @@
+ #include "MsgDialog.hpp"
+ #include "I18N.hpp"
+ #include "libslic3r/AppConfig.hpp"
+-#include "libslic3r/Format/DRC.hpp"
+ #include <wx/language.h>
+ #include "OG_CustomCtrl.hpp"
+ #include "wx/graphics.h"
+@@ -751,58 +750,6 @@
+     return sizer_row;
+ }
+ 
+-wxBoxSizer* PreferencesDialog::create_item_draco(wxString title, wxString side_label, wxString tooltip)
+-{
+-    wxBoxSizer* sizer_input = new wxBoxSizer(wxHORIZONTAL);
+-
+-    auto input_title = new wxStaticText(m_parent, wxID_ANY, title, wxDefaultPosition, DESIGN_TITLE_SIZE, wxST_NO_AUTORESIZE);
+-    input_title->SetForegroundColour(DESIGN_GRAY900_COLOR);
+-    input_title->SetFont(::Label::Body_14);
+-    input_title->SetToolTip(tooltip);
+-    input_title->Wrap(DESIGN_TITLE_SIZE.x);
+-    input_title->SetToolTip(tooltip);
+-
+-    auto input = new ::TextInput(m_parent, wxEmptyString, side_label, wxEmptyString, wxDefaultPosition, DESIGN_INPUT_SIZE, wxTE_PROCESS_ENTER);
+-    StateColor input_bg(std::pair<wxColour, int>(wxColour("#F0F0F1"), StateColor::Disabled),
+-                        std::pair<wxColour, int>(*wxWHITE, StateColor::Enabled));
+-    input->SetBackgroundColor(input_bg);
+-    input->GetTextCtrl()->SetValue(app_config->get("drc_bits"));
+-    wxTextValidator validator(wxFILTER_DIGITS);
+-    input->SetToolTip(tooltip);
+-    input->GetTextCtrl()->SetValidator(validator);
+-
+-    sizer_input->AddSpacer(FromDIP(DESIGN_LEFT_MARGIN));
+-    sizer_input->Add(input_title, 0, wxALIGN_CENTER_VERTICAL);
+-    sizer_input->Add(input      , 0, wxALIGN_CENTER_VERTICAL | wxLEFT, FromDIP(5));
+-
+-    std::function<void()> set_draco_bits = [this, input]() {
+-        long drc_bits = DRC_BITS_DEFAULT;
+-        input->GetTextCtrl()->GetValue().ToLong(&drc_bits);
+-        if (drc_bits > DRC_BITS_MAX) {
+-            drc_bits = DRC_BITS_MAX;
+-            input->GetTextCtrl()->SetValue(std::to_string(drc_bits));
+-        } else if (drc_bits < DRC_BITS_MIN && drc_bits != 0) {
+-            drc_bits = DRC_BITS_MIN;
+-            input->GetTextCtrl()->SetValue(std::to_string(drc_bits));
+-        }
+-
+-        app_config->set("drc_bits", std::to_string(drc_bits));
+-        app_config->save();
+-    };
+-
+-    input->GetTextCtrl()->Bind(wxEVT_TEXT_ENTER, [set_draco_bits](wxCommandEvent& e) {
+-        set_draco_bits();
+-        e.Skip();
+-    });
+-
+-    input->GetTextCtrl()->Bind(wxEVT_KILL_FOCUS, [set_draco_bits](wxFocusEvent& e) {
+-        set_draco_bits();
+-        e.Skip();
+-    });
+-
+-    return sizer_input;
+-}
+-
+ wxBoxSizer* PreferencesDialog::create_item_darkmode(wxString title,wxString tooltip, std::string param)
+ {
+     wxBoxSizer* m_sizer_checkbox = new wxBoxSizer(wxHORIZONTAL);
+@@ -917,15 +864,6 @@
+              }
+         }
+ 
+-        if (param == "associate_drc") {
+-            bool pbool = app_config->get("associate_drc") == "true" ? true : false;
+-            if (pbool) {
+-                wxGetApp().associate_files(L"drc");
+-            } else {
+-                wxGetApp().disassociate_files(L"drc");
+-            }
+-        }
+-
+         if (param == "associate_stl") {
+             bool pbool = app_config->get("associate_stl") == "true" ? true : false;
+             if (pbool) {
+@@ -1368,13 +1306,6 @@
+     g_sizer->Add(item_pop_up_filament_map_dialog);
+ #endif
+ 
+-    auto item_draco_bits = create_item_draco(_L("Quality level for Draco export"),
+-        _L("bits"),
+-        _L("Controls the quantization bit depth used when compressing the mesh to Draco format.\n"
+-           "0 = lossless compression (geometry is preserved at full precision). Valid lossy values range from 8 to 30.\n"
+-           "Lower values produce smaller files but lose more geometric detail; higher values preserve more detail at the cost of larger files."));
+-    g_sizer->Add(item_draco_bits);
+-
+     g_sizer->AddSpacer(FromDIP(10));
+     sizer_page->Add(g_sizer, 0, wxEXPAND);
+ 
+@@ -1623,9 +1554,6 @@
+     auto item_associate_3mf    = create_item_checkbox(_L("Associate 3MF files to OrcaSlicer"), _L("If enabled, sets OrcaSlicer as default application to open 3MF files.") , "associate_3mf");
+     g_sizer->Add(item_associate_3mf);
+ 
+-    auto item_associate_drc = create_item_checkbox(_L("Associate DRC files to OrcaSlicer"), _L("If enabled, sets OrcaSlicer as default application to open DRC files."), "associate_drc");
+-    g_sizer->Add(item_associate_drc);
+-
+     auto item_associate_stl    = create_item_checkbox(_L("Associate STL files to OrcaSlicer"), _L("If enabled, sets OrcaSlicer as default application to open STL files.") , "associate_stl");
+     g_sizer->Add(item_associate_stl);
+ 
+--- b/src/slic3r/GUI/Preferences.hpp
++++ a/src/slic3r/GUI/Preferences.hpp
+@@ -91,11 +91,9 @@
+     wxBoxSizer *create_item_button(wxString title, wxString title2, wxString tooltip, wxString tooltip2, std::function<void()> onclick);
+     wxBoxSizer *create_item_downloads(wxString title, wxString tooltip);
+     wxBoxSizer *create_item_input(wxString title, wxString title2, wxString tooltip, std::string param, std::function<void(wxString)> onchange = {});
+-    wxBoxSizer *create_item_spinctrl(wxString title, wxString title2, wxString side_label, wxString tooltip, std::string param, int min, int max, std::function<void(int)> onchange = nullptr);
+     wxBoxSizer *create_camera_orbit_mult_input(wxString title, wxString tooltip);
+     wxBoxSizer *create_item_backup(wxString title, wxString tooltip);
+     wxBoxSizer *create_item_auto_reslice(wxString title, wxString checkbox_tooltip, wxString delay_tooltip);
+-    wxBoxSizer *create_item_draco(wxString title, wxString side_label, wxString tooltip);
+     wxBoxSizer *create_item_multiple_combobox(wxString title, wxString tooltip, std::string parama, std::vector<wxString> vlista, std::vector<wxString> vlistb);
+ #ifdef WIN32
+     wxBoxSizer *create_item_link_association(wxString url_prefix, wxString website_name);

@@ -31,10 +31,17 @@
               oldAttrs.cmakeFlags;
         in
           filtered ++ [
-            (prev.lib.cmakeFeature
-              "LIBNOISE_LIBRARY_RELEASE"
-              "${prev.libnoise}/lib/libnoise-static.a")
+            (prev.lib.cmakeFeature "LIBNOISE_LIBRARY_RELEASE" "${prev.libnoise}/lib/libnoise-static.a")
           ];
+      patches = oldAttrs.patches ++ [
+        ./revert-draco.patch
+        #(prev.fetchpatch {
+        #  name = "revert-draco.patch";
+        #  url = "https://github.com/SoftFever/OrcaSlicer/commit/bb30999673cdac7644f7c4529259cce236c3b813.patch";
+        #  hash = "sha256-3hedO+z4x1Cgs6HLL+XR83MJCTqLB3TniChiNPGM4Dk=";
+        #  revert = true;
+        #})
+      ];
     });
   };
 
