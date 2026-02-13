@@ -3,6 +3,7 @@
   outputs,
   lib,
   config,
+  pkgs,
   ...
 }: {
   nixpkgs = {
@@ -39,6 +40,20 @@
     ];
     trusted-public-keys = [
       #"nabam-nixos-rockchip.cachix.org-1:BQDltcnV8GS/G86tdvjLwLFz1WeFqSk7O9yl+DR0AVM"
+    ];
+    builders-use-substitutes = true;
+  };
+  nix = {
+    distributedBuilds = true;
+    buildMachines = [
+      {
+        hostName = "nixos-test";
+        sshUser = "root";
+        #sshKey = "/root/.ssh/remotebuild";
+        system = pkgs.stdenv.hostPlatform.system;
+        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+        maxJobs = 30;
+      }
     ];
   };
 
