@@ -70,7 +70,7 @@
     # Prod
     krita
     libreoffice-qt6-fresh
-    orca-slicer-patched
+    orca-slicer #-patched
     LycheeSlicer-patched
     unstable.freecad
 
