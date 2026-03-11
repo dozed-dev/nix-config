@@ -84,6 +84,8 @@
     gdb
     teleport
 
+    proxmark3-patched
+
     # LSP
     unstable.nixd
     unstable.nodePackages.bash-language-server

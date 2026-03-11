@@ -1,0 +1,33 @@
+diff --git a/client/src/cmdhfmf.c b/client/src/cmdhfmf.c
+index 9ec4198ed..4c6198ef9 100644
+--- a/client/src/cmdhfmf.c
++++ b/client/src/cmdhfmf.c
+@@ -3115,10 +3115,6 @@ static int CmdHF14AMfAutoPWN(const char *Cmd) {
+     bool isMifareMini = ((nxptype & MTMINI) == MTMINI);
+     bool isMifarePlus = ((nxptype & MTPLUS) == MTPLUS);
+ 
+-    if (isMifarePlus) {
+-        PrintAndLogEx(INFO, "MIFARE Plus card detected.  Using limited set of attacks");
+-    }
+-
+     if (isMifareMini && sector_cnt != MIFARE_MINI_MAXSECTOR) {
+         PrintAndLogEx(WARNING, "MIFARE Mini S20 card detected. Changing sector count to %u", MIFARE_MINI_MAXSECTOR);
+         sector_cnt = MIFARE_MINI_MAXSECTOR;
+@@ -3621,17 +3617,6 @@ tryNested:
+                     } else {
+ tryHardnested: // If the nested attack fails then we try the hardnested attack
+ 
+-                        // skip this
+-                        if (isMifarePlus) {
+-
+-                            // Show the results to the user
+-                            printKeyTable(sector_cnt, e_sector);
+-                            PrintAndLogEx(NORMAL, "");
+-                            free(e_sector);
+-                            free(fptr);
+-                            return PM3_ESOFT;
+-                        }
+-
+                         PrintAndLogEx(NORMAL, "");
+                         if (verbose) {
+                             PrintAndLogEx(INFO, "--- " _CYAN_("Enter hardnested key recovery mode") " -------------------------");

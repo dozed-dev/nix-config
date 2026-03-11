@@ -6,6 +6,12 @@
   modifications = final: prev: {
     # from: https://github.com/msanft/ida-pro-overlay
     ida-pro = import ./ida-pro.nix;
+    proxmark3-patched = prev.proxmark3.overrideAttrs (oldAttrs: {
+      nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [
+        #final.diffutils
+      ];
+      patches = [ ./mfp.patch ];
+    });
     ghidra-qingke = prev.ghidra.overrideAttrs (oldAttrs: {
       src = prev.fetchFromGitHub {
         owner = "dozed-dev";
