@@ -24,6 +24,7 @@
     ../base-system.nix
     ../virt.nix
     ../atk-wch-link-udev.nix
+    ../modem.nix
   ];
 
   hardware.graphics.enable32Bit = true;
