@@ -52,7 +52,7 @@
     # GUI Tools
     yubikey-manager
     remmina
-    helvum
+    crosspipe
 
     # Desktop/media
     unstable.telegram-desktop
@@ -78,6 +78,7 @@
     lazygit
     python3
     minicom
+    screen
     usbutils
     binwalk
     ghidra #-qingke
@@ -88,7 +89,7 @@
 
     # LSP
     unstable.nixd
-    unstable.nodePackages.bash-language-server
+    #unstable.nodePackages.bash-language-server
 
     # Fonts
     unstable.ubuntu-classic
