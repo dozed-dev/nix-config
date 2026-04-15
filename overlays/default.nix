@@ -21,6 +21,7 @@
       };
     });
     LycheeSlicer-patched = prev.callPackage ./LycheeSlicer.nix { oldLycheeSlicer = prev.LycheeSlicer; };
+    uvtools = prev.callPackage ./uvtools {};
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

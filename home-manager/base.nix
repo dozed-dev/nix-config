@@ -72,6 +72,7 @@
     libreoffice-qt6-fresh
     orca-slicer #-patched
     LycheeSlicer-patched
+    uvtools
     unstable.freecad
 
     # Dev
