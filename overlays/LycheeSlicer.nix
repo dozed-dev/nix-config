@@ -58,9 +58,9 @@ let
     desktopName = "LycheeSlicer";
     icon = "${appimageContents}/usr/share/icons/hicolor/512x512/apps/lycheeslicer.png";
     noDisplay = false;
-    exec = "${pname}";
+    exec = "${pname} %u";
     terminal = false;
-    mimeTypes = [ "model/stl" ];
+    mimeTypes = [ "model/stl" "x-scheme-handler/lycheeslicer" ];
     categories = [ "Graphics" ];
     keywords = [
       "STL"
