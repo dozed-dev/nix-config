@@ -20,6 +20,14 @@
         sha256 = "sha256-GnI004jA0D638o4pLgoJ87RPJ8m+IHyKqkjpeUhWjLo=";
       };
     });
+    orca-slicer = prev.orca-slicer.overrideAttrs (oldAttrs: {
+      src = prev.fetchFromGitHub {
+        owner = "OrcaSlicer";
+        repo = "OrcaSlicer";
+        rev = "master";
+        sha256 = "sha256-gaET/8NBrrVBZZdyi+6tFBUIZxJWrNNSPxZ0U3lwY1w=";
+      };
+    });
     LycheeSlicer-patched = prev.callPackage ./LycheeSlicer.nix { oldLycheeSlicer = prev.LycheeSlicer; };
     uvtools = prev.callPackage ./uvtools {};
   };
