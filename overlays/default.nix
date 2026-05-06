@@ -27,30 +27,6 @@
         rev = "master";
         sha256 = "sha256-gaET/8NBrrVBZZdyi+6tFBUIZxJWrNNSPxZ0U3lwY1w=";
       };
-    patches = (builtins.filter
-      (p: !(builtins.isPath p && builtins.match ".*0001-not-for-upstream-CMakeLists-Link-against-webkit2gtk-.*" (toString p) != null))
-      (oldAttrs.patches or [])
-    ) ++ [
-      (prev.writeText "CMakeLists-Link-against-webkit2git.patch" ''
-        diff --git a/CMakeLists.txt b/CMakeLists.txt
-        index d3ae729277..11cde5d2f2 100644
-        --- a/CMakeLists.txt
-        +++ b/CMakeLists.txt
-        @@ -177,6 +177,12 @@ if (IS_CROSS_COMPILE)
-             set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
-         endif ()
-
-        +# We link against webkit2gtk symbols in src/slic3r/GUI/Widgets/WebView.cpp
-        +if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-        +    target_link_libraries(libslic3r_gui "-lwebkit2gtk-4.1")
-        +endif ()
-        +
-        +
-         # Print out the SLIC3R_* cache options
-         get_cmake_property(_cache_vars CACHE_VARIABLES)
-         list (SORT _cache_vars)
-      '')
-    ];
     });
     LycheeSlicer-patched = prev.callPackage ./LycheeSlicer.nix { oldLycheeSlicer = prev.LycheeSlicer; };
     uvtools = prev.callPackage ./uvtools {};
