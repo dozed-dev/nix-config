@@ -20,13 +20,13 @@
 
 buildDotnetModule rec {
   pname = "uvtools";
-  version = "6.0.0";
+  version = "6.0.3";
 
   src = fetchFromGitHub {
     owner = "sn4k3";
     repo = "UVtools";
     rev = "v${version}";
-    hash = "sha256-ic82XfX5kqXLD2Jvn3jcb7JON2TtZhrdXBz3Gyrpc4Y=";
+    hash = "sha256-XAi0CnBsSZPmlQCLciAPue3G8JN8WYd8BkBo44Xan94=";
   };
 
   # ---- .NET SDK / runtime ----
