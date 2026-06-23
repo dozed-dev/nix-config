@@ -44,6 +44,20 @@ buildDotnetModule rec {
     "UVtools.Cmd/UVtools.Cmd.csproj"
   ];
 
+  # ---- Pin off-band multi-targeting away ----
+  # UVtools.AvaloniaControls multi-targets net8.0;net9.0;net10.0. We only build
+  # and ship the net10.0 app, and UVtools.UI consumes only the net10.0 output of
+  # this library — so the net8.0/net9.0 builds are wasted work that pull in
+  # reference/runtime packs (Microsoft.NETCore.App.Ref etc.) at patch versions
+  # pinned by the SDK. Each time nixpkgs bumps the .NET 10 SDK, those pinned
+  # versions move and the locked deps.json goes stale (NU1102). Building net10.0
+  # only removes that dependency entirely: the net10.0 packs ship with the SDK
+  # and always match it, so the build stays reproducible across SDK patch bumps.
+  postPatch = ''
+    substituteInPlace UVtools.AvaloniaControls/UVtools.AvaloniaControls.csproj \
+      --replace-fail 'net8.0;net9.0;net10.0' 'net10.0'
+  '';
+
   # ---- NuGet dependency lock ----
   # Generate this file by running:
   #   nix-build -A uvtools.passthru.fetch-deps
