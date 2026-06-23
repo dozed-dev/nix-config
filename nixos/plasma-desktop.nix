@@ -49,12 +49,9 @@
     kdePackages.filelight
     kdePackages.kate
 
-    polonium
-
     # Theming
     kdePackages.kde-gtk-config
     kdePackages.qtstyleplugin-kvantum
-    plasma5Packages.qtstyleplugin-kvantum
   ];
 
   # Fonts
