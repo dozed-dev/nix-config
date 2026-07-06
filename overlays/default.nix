@@ -4,6 +4,15 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
+    throttled = prev.throttled.overrideAttrs (old: rec {
+      version = "0.11";
+      src = final.fetchFromGitHub {
+        owner = "erpalma";
+        repo = "throttled";
+        rev = "v${version}";
+        sha256 = "sha256-+3ktDkr5hvOfHcch4+mjgJqcuw24UgWTkJqTyDQumyk=";
+      };
+    });
     # from: https://github.com/msanft/ida-pro-overlay
     ida-pro = import ./ida-pro/ida-pro.nix;
     proxmark3-patched = prev.proxmark3.overrideAttrs (oldAttrs: {
