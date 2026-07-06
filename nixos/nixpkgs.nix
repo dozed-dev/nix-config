@@ -13,6 +13,7 @@
       # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.unstable-packages
       outputs.overlays.stable-packages
+      outputs.overlays.modifications
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
