@@ -96,7 +96,12 @@
     unstable.ubuntu-classic
     unstable.inter
     unstable.nerd-fonts.fira-code
+
+    # misc
+    gtk3
+    glib
   ];
+  dconf.enable = true;
 
   programs.home-manager.enable = true;
   programs.git = {
