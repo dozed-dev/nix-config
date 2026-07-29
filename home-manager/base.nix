@@ -76,6 +76,8 @@
     unstable.freecad
 
     # Dev
+    binutils
+    openssl
     lazygit
     python3
     minicom
