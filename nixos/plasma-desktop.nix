@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  # FLICKER WORKAROUND
+  environment.sessionVariables.KWIN_DRM_NO_DIRECT_SCANOUT = "1";
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
